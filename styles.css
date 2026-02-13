@@ -1,6 +1,11 @@
 html { scroll-behavior: smooth; }
 body { background-color: #111111; color: #FFFFFF; }
 
+/* Questa regola dice al sito di nascondere davvero gli elementi */
+.hidden {
+  display: none !important;
+}
+
 /* Buttons */
 .btn-blue {
   background: linear-gradient(135deg, #41B3E7 0%, #6BC9F0 100%);
