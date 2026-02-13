@@ -1,1089 +1,516 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PLUGHUB | Power Bank Sharing Italia - Non restare mai senza batteria</title>
-    <meta name="description" content="PLUGHUB - Il primo servizio di power bank sharing in Italia. Paga con carta, Apple Pay o Google Pay direttamente sul POS. 1€ ogni 30 min.">
-    
-    <!-- Google Fonts: Montserrat -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- FontAwesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PLUGHUB | Power Bank Sharing Italia</title>
+  <meta name="description" content="PLUGHUB - Power bank sharing in Italia. Trova una stazione vicino a te e ottieni indicazioni in un tap." />
 
-    <!-- Tailwind Config -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            white: '#FFFFFF',
-                            black: '#111111',
-                            blue: '#41B3E7',
-                            lightblue: '#6BC9F0',
-                            gray: '#1A1A1A',
-                            card: '#1E1E1E',
-                            text: '#F5F5F7'
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Montserrat', 'sans-serif'],
-                    }
-                }
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Tailwind Config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              white: '#FFFFFF',
+              black: '#111111',
+              blue: '#41B3E7',
+              lightblue: '#6BC9F0',
+              gray: '#1A1A1A',
+              card: '#1E1E1E',
+              text: '#F5F5F7'
             }
+          },
+          fontFamily: { sans: ['Montserrat', 'sans-serif'] }
         }
-    </script>
+      }
+    }
+  </script>
 
-    <style>
-        html { scroll-behavior: smooth; }
-        body { background-color: #111111; color: #FFFFFF; }
-        .custom-shadow { box-shadow: 0 10px 40px -10px rgba(255,255,255,0.1); }
-        .btn-blue {
-            background: linear-gradient(135deg, #41B3E7 0%, #6BC9F0 100%);
-            transition: all 0.3s ease;
-            color: #111111;
-        }
-        .btn-blue:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px -5px rgba(65, 179, 231, 0.5);
-        }
-        .btn-white-outline {
-            border: 2px solid white;
-            color: white;
-            transition: all 0.3s ease;
-        }
-        .btn-white-outline:hover { background: white; color: #111111; }
-        .btn-gray { background: #374151; color: white; transition: all 0.3s ease; }
-        .btn-gray:hover { background: #4B5563; }
-        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out, padding 0.3s ease; }
-        .faq-item.active .faq-answer { max-height: 500px; padding-top: 1rem; }
-        .faq-item.active .faq-icon { transform: rotate(180deg); }
-        input, textarea, select { background-color: #1E1E1E; color: white; border-color: #333; }
-        input::placeholder, textarea::placeholder { color: #666; }
-        
-        /* Cookie Banner Styles */
-        .cookie-banner {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: #1a1a1a;
-            border-top: 1px solid #333;
-            z-index: 100;
-            padding: 1rem;
-            box-shadow: 0 -4px 20px rgba(0,0,0,0.5);
-        }
-        .cookie-banner.hidden { display: none; }
-        
-        /* Map Overlay */
-        .map-overlay {
-            position: absolute;
-            inset: 0;
-            background: rgba(17, 17, 17, 0.98);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            z-index: 20;
-            border-radius: 1.5rem;
-        }
-        .map-overlay.hidden { display: none; }
-        
-        /* Map Canvas */
-        #map-canvas {
-            width: 100%;
-            height: 100%;
-        }
-        
-        /* Custom InfoWindow Styles */
-        .gm-style .gm-style-iw-c {
-            background-color: #1E1E1E !important;
-            border-radius: 12px !important;
-            padding: 0 !important;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.5) !important;
-        }
-        .gm-style .gm-style-iw-d {
-            overflow: hidden !important;
-            padding: 16px !important;
-            background-color: #1E1E1E !important;
-            color: #FFFFFF !important;
-        }
-        .gm-style .gm-style-iw-t::after {
-            background: #1E1E1E !important;
-        }
-        .gm-style .gm-style-iw-c button {
-            filter: invert(1) !important;
-        }
-        
-        /* Custom Marker Animation */
-        @keyframes markerPulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-        .custom-marker {
-            animation: markerPulse 2s infinite;
-        }
-    </style>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="app.js" defer></script>
 </head>
+
 <body class="font-sans antialiased bg-brand-black text-white">
 
-    <!-- COOKIE BANNER -->
-    <div id="cookie-banner" class="cookie-banner hidden">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col lg:flex-row items-center justify-between gap-4">
-                <div class="text-sm text-gray-300 text-center lg:text-left">
-                    <p><strong class="text-white">Informativa Breve:</strong> Questo sito utilizza cookie tecnici e servizi di terze parti (Google Maps) per mostrarti la posizione delle nostre torrette. Cliccando su "Accetta", acconsenti all'uso dei cookie e al trattamento del tuo IP da parte di Google. Cliccando su "Rifiuta" o sulla "X", navigherai solo con i cookie tecnici, ma la mappa non sarà visibile.</p>
-                </div>
-                <div class="flex flex-wrap items-center justify-center gap-3">
-                    <button onclick="acceptCookies()" class="btn-blue px-6 py-2 rounded-full font-semibold text-sm">Accetta Tutto</button>
-                    <button onclick="rejectCookies()" class="btn-gray px-6 py-2 rounded-full font-semibold text-sm">Rifiuta / Solo Tecnici</button>
-                    <a href="cookie-policy.html" class="text-brand-blue hover:underline text-sm font-semibold">Leggi la Cookie Policy</a>
-                    <button onclick="closeCookieBanner()" class="text-gray-400 hover:text-white ml-2"><i class="fa-solid fa-xmark text-xl"></i></button>
-                </div>
-            </div>
+  <!-- COOKIE BANNER -->
+  <div id="cookie-banner" class="cookie-banner hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col lg:flex-row items-center justify-between gap-4">
+        <div class="text-sm text-gray-300 text-center lg:text-left">
+          <p><strong class="text-white">Informativa breve:</strong> questo sito usa cookie tecnici e servizi di terze parti (Google Maps) per mostrarti la mappa. Accettando, consenti l’uso di Google Maps. Rifiutando, vedrai comunque la lista delle stazioni, ma la mappa resterà disattivata.</p>
         </div>
+        <div class="flex flex-wrap items-center justify-center gap-3">
+          <button id="btn-accept-cookies" class="btn-blue px-6 py-2 rounded-full font-semibold text-sm">Accetta</button>
+          <button id="btn-reject-cookies" class="btn-gray px-6 py-2 rounded-full font-semibold text-sm">Rifiuta</button>
+          <a href="cookie-policy.html" class="text-brand-blue hover:underline text-sm font-semibold">Cookie Policy</a>
+          <button id="btn-close-cookie" class="text-gray-400 hover:text-white ml-2" aria-label="Chiudi">
+            <i class="fa-solid fa-xmark text-xl"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <nav id="navbar" class="fixed top-0 left-0 right-0 bg-brand-black/95 backdrop-blur-md z-50 border-b border-gray-800 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-20">
+        <a class="flex items-center" href="#top" aria-label="PLUGHUB">
+          <div class="w-14 h-14 mr-3 flex items-center justify-center">
+            <img src="logo.png" alt="PLUGHUB Logo" class="w-full h-full object-contain">
+          </div>
+          <span class="font-bold text-2xl tracking-tight"><span class="text-white">PLUG</span><span class="text-brand-blue">HUB</span></span>
+        </a>
+
+        <div class="hidden lg:flex items-center space-x-8">
+          <a href="#mappa" class="font-semibold text-sm text-gray-300 hover:text-brand-blue transition-colors">Mappa</a>
+          <a href="#prezzi" class="font-semibold text-sm text-gray-300 hover:text-brand-blue transition-colors">Prezzi</a>
+          <a href="#per-locali" class="font-semibold text-sm text-gray-300 hover:text-brand-blue transition-colors">Per i Locali</a>
+          <a href="#faq" class="font-semibold text-sm text-gray-300 hover:text-brand-blue transition-colors">FAQ</a>
+          <a href="#contatti" class="font-semibold text-sm text-gray-300 hover:text-brand-blue transition-colors">Contatti</a>
+        </div>
+
+        <div class="hidden lg:block">
+          <a href="#per-locali" class="btn-blue px-6 py-3 rounded-full font-semibold text-sm shadow-md">Diventa Partner</a>
+        </div>
+
+        <div class="lg:hidden flex items-center">
+          <button id="mobile-menu-btn" class="text-white hover:text-brand-blue focus:outline-none p-2">
+            <i class="fa-solid fa-bars text-2xl"></i>
+          </button>
+        </div>
+      </div>
     </div>
 
-    <!-- NAVIGATION -->
-    <nav id="navbar" class="fixed top-0 left-0 right-0 bg-brand-black/95 backdrop-blur-md z-50 border-b border-gray-800 transition-all duration-300">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
-                <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="window.scrollTo(0,0)">
-                    <div class="w-20 h-20 mr-3 flex items-center justify-center">
-                        <img src="logo.png" alt="PLUGHUB Logo" class="w-full h-full object-contain">
-                    </div>
-                    <span class="font-bold text-2xl tracking-tight"><span class="text-white">PLUG</span><span class="text-brand-blue">HUB</span></span>
-                </div>
-                <div class="hidden lg:flex items-center space-x-8">
-                    <a href="#come-funziona" class="font-semibold text-sm text-gray-300 hover:text-brand-blue transition-colors">Come Funziona</a>
-                    <a href="#mappa" class="font-semibold text-sm text-gray-300 hover:text-brand-blue transition-colors">Mappa</a>
-                    <a href="#prezzi" class="font-semibold text-sm text-gray-300 hover:text-brand-blue transition-colors">Prezzi</a>
-                    <a href="#per-locali" class="font-semibold text-sm text-gray-300 hover:text-brand-blue transition-colors">Per i Locali</a>
-                    <a href="#faq" class="font-semibold text-sm text-gray-300 hover:text-brand-blue transition-colors">FAQ</a>
-                    <a href="#contatti" class="font-semibold text-sm text-gray-300 hover:text-brand-blue transition-colors">Contatti</a>
-                </div>
-                <div class="hidden lg:block">
-                    <a href="#per-locali" class="btn-blue px-6 py-3 rounded-full font-semibold text-sm shadow-md">Diventa Partner</a>
-                </div>
-                <div class="lg:hidden flex items-center">
-                    <button id="mobile-menu-btn" class="text-white hover:text-brand-blue focus:outline-none p-2"><i class="fa-solid fa-bars text-2xl"></i></button>
-                </div>
-            </div>
+    <div id="mobile-menu" class="hidden lg:hidden bg-brand-black border-t border-gray-800 absolute w-full shadow-xl">
+      <div class="px-4 pt-2 pb-8 space-y-2">
+        <a href="#mappa" class="block px-4 py-3 text-base font-semibold text-gray-300 hover:text-brand-blue hover:bg-gray-900 rounded-lg transition-colors">Mappa</a>
+        <a href="#prezzi" class="block px-4 py-3 text-base font-semibold text-gray-300 hover:text-brand-blue hover:bg-gray-900 rounded-lg transition-colors">Prezzi</a>
+        <a href="#per-locali" class="block px-4 py-3 text-base font-semibold text-gray-300 hover:text-brand-blue hover:bg-gray-900 rounded-lg transition-colors">Per i Locali</a>
+        <a href="#faq" class="block px-4 py-3 text-base font-semibold text-gray-300 hover:text-brand-blue hover:bg-gray-900 rounded-lg transition-colors">FAQ</a>
+        <a href="#contatti" class="block px-4 py-3 text-base font-semibold text-gray-300 hover:text-brand-blue hover:bg-gray-900 rounded-lg transition-colors">Contatti</a>
+        <div class="pt-4 px-4">
+          <a href="#per-locali" class="block w-full btn-blue text-center px-6 py-4 rounded-full font-bold text-base">Diventa Partner</a>
         </div>
-        <div id="mobile-menu" class="hidden lg:hidden bg-brand-black border-t border-gray-800 absolute w-full shadow-xl">
-            <div class="px-4 pt-2 pb-8 space-y-2">
-                <a href="#come-funziona" class="block px-4 py-3 text-base font-semibold text-gray-300 hover:text-brand-blue hover:bg-gray-900 rounded-lg transition-colors">Come Funziona</a>
-                <a href="#mappa" class="block px-4 py-3 text-base font-semibold text-gray-300 hover:text-brand-blue hover:bg-gray-900 rounded-lg transition-colors">Mappa</a>
-                <a href="#prezzi" class="block px-4 py-3 text-base font-semibold text-gray-300 hover:text-brand-blue hover:bg-gray-900 rounded-lg transition-colors">Prezzi</a>
-                <a href="#per-locali" class="block px-4 py-3 text-base font-semibold text-gray-300 hover:text-brand-blue hover:bg-gray-900 rounded-lg transition-colors">Per i Locali</a>
-                <a href="#faq" class="block px-4 py-3 text-base font-semibold text-gray-300 hover:text-brand-blue hover:bg-gray-900 rounded-lg transition-colors">FAQ</a>
-                <a href="#contatti" class="block px-4 py-3 text-base font-semibold text-gray-300 hover:text-brand-blue hover:bg-gray-900 rounded-lg transition-colors">Contatti</a>
-                <div class="pt-4 px-4">
-                    <a href="#per-locali" class="block w-full btn-blue text-center px-6 py-4 rounded-full font-bold text-base">Diventa Partner</a>
-                </div>
+      </div>
+    </div>
+  </nav>
+
+  <div id="top" class="h-20"></div>
+
+  <!-- HERO -->
+  <header class="relative overflow-hidden bg-brand-black">
+    <div class="absolute inset-0 bg-gradient-to-br from-brand-black via-brand-black to-brand-blue/10"></div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <div class="inline-flex items-center gap-2 px-4 py-2 bg-brand-blue/15 text-brand-blue rounded-full text-sm font-bold mb-6 border border-brand-blue/30">
+            <i class="fa-solid fa-bolt"></i>
+            Power bank sharing
+          </div>
+          <h1 class="text-4xl lg:text-6xl font-extrabold leading-tight">
+            Non restare mai senza <span class="text-brand-blue">batteria</span>.
+          </h1>
+          <p class="mt-6 text-lg text-gray-300 max-w-xl">
+            Trova una stazione vicino a te, ritira un powerbank e continua la giornata. Restituiscilo in qualsiasi stazione.
+          </p>
+          <div class="mt-8 flex flex-col sm:flex-row gap-3">
+            <a href="#mappa" class="btn-blue px-8 py-4 rounded-full font-bold text-center">Trova una stazione</a>
+            <a href="#per-locali" class="btn-white-outline px-8 py-4 rounded-full font-bold text-center">Diventa partner</a>
+          </div>
+
+          <div class="mt-10 grid grid-cols-3 gap-4 max-w-md">
+            <div class="bg-gray-900/60 border border-gray-800 rounded-2xl p-4 text-center">
+              <div class="text-2xl font-extrabold text-white">1€</div>
+              <div class="text-xs text-gray-400 mt-1">ogni 30 min</div>
             </div>
+            <div class="bg-gray-900/60 border border-gray-800 rounded-2xl p-4 text-center">
+              <div class="text-2xl font-extrabold text-white">0</div>
+              <div class="text-xs text-gray-400 mt-1">gestione staff</div>
+            </div>
+            <div class="bg-gray-900/60 border border-gray-800 rounded-2xl p-4 text-center">
+              <div id="station-count-hero" class="text-2xl font-extrabold text-white">—</div>
+              <div class="text-xs text-gray-400 mt-1">stazioni</div>
+            </div>
+          </div>
         </div>
-    </nav>
 
-    <div class="h-20"></div>
-
-    <!-- HERO -->
-    <section id="hero" class="relative overflow-hidden bg-brand-black">
-        <div class="absolute inset-0 bg-gradient-to-br from-brand-black via-brand-black to-brand-blue/10"></div>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-20 lg:pt-24 lg:pb-32 relative">
-            <div class="grid lg:grid-cols-2 gap-12 items-center">
-                <div class="order-2 lg:order-1 text-center lg:text-left">
-                    <div class="inline-flex items-center gap-2 px-4 py-2 bg-brand-blue/20 text-brand-blue rounded-full text-sm font-bold mb-6 tracking-wide uppercase border border-brand-blue/30">
-                        <span class="w-2 h-2 bg-brand-blue rounded-full animate-pulse"></span>Servizio Attivo in Italia
-                    </div>
-                    <h1 class="text-4xl lg:text-6xl font-bold leading-tight mb-6 text-white">
-                        Non restare mai <br><span class="text-brand-blue">senza batteria</span> <br><span class="text-3xl lg:text-5xl text-gray-400">in città</span>
-                    </h1>
-                    <p class="text-lg lg:text-xl text-gray-400 mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0">
-                        Trova una stazione PLUGHUB nei bar e locali d'Italia. Tappa la tua carta sul POS, preleva e ricarica. Semplice e immediato.
-                    </p>
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                        <a href="#mappa" class="btn-blue px-8 py-4 rounded-full font-bold text-lg flex items-center justify-center gap-3 shadow-lg hover:shadow-xl transition-all">
-                            <i class="fa-solid fa-location-dot"></i>Trova una Stazione
-                        </a>
-                        <a href="#per-locali" class="btn-white-outline px-8 py-4 rounded-full font-bold text-lg flex items-center justify-center gap-3">
-                            Ho un Locale<i class="fa-solid fa-store"></i>
-                        </a>
-                    </div>
-                    <div class="mt-10 flex items-center justify-center lg:justify-start gap-4 flex-wrap">
-                        <span class="flex items-center gap-2 bg-gray-900 px-4 py-2 rounded-full border border-gray-700 text-sm font-semibold text-gray-300">
-                            <i class="fa-solid fa-credit-card text-brand-blue"></i>POS Contactless
-                        </span>
-                        <span class="flex items-center gap-2 bg-gray-900 px-4 py-2 rounded-full border border-gray-700 text-sm font-semibold text-gray-300">
-                            <i class="fa-solid fa-euro-sign text-brand-blue"></i>Da 1€
-                        </span>
-                    </div>
-                </div>
-                <div class="order-1 lg:order-2 relative">
-                    <div class="relative z-10 bg-gray-900 rounded-3xl p-6 custom-shadow border border-gray-800 max-w-sm mx-auto transform hover:scale-[1.02] transition-transform duration-500">
-                        <div class="bg-black rounded-2xl overflow-hidden aspect-[4/5] relative border border-gray-800">
-                            <div class="absolute top-0 left-0 right-0 h-12 bg-black/80 backdrop-blur-sm flex items-center justify-between px-6 text-white text-xs z-10 border-b border-gray-800">
-                                <span>14:30</span>
-                                <div class="flex gap-2"><i class="fa-solid fa-signal"></i><i class="fa-solid fa-wifi"></i><i class="fa-solid fa-battery-quarter text-red-400 animate-pulse"></i></div>
-                            </div>
-                            <div class="h-full flex flex-col items-center justify-center pt-12 pb-8 px-6 bg-gradient-to-br from-gray-900 to-black text-white relative overflow-hidden">
-                                <div class="absolute top-0 left-0 w-full h-full opacity-20">
-                                    <div class="absolute top-10 left-10 w-32 h-32 bg-brand-blue rounded-full blur-3xl"></div>
-                                </div>
-                                <div class="w-full max-w-xs bg-gray-800/50 backdrop-blur-md rounded-2xl p-6 border border-gray-700 mb-6">
-                                    <div class="flex justify-between items-center mb-4">
-                                        <span class="text-sm font-bold text-gray-200">POS PLUGHUB</span>
-                                        <i class="fa-brands fa-cc-stripe text-2xl text-gray-400"></i>
-                                    </div>
-                                    <div class="bg-gray-700/50 rounded-lg p-4 mb-4 text-center border border-gray-600">
-                                        <i class="fa-solid fa-wifi text-3xl mb-2 text-brand-blue animate-pulse"></i>
-                                        <p class="text-xs text-gray-400">Avvicina la carta</p>
-                                    </div>
-                                    <div class="text-center text-2xl font-bold text-brand-blue">1.00 €</div>
-                                    <div class="text-center text-xs text-gray-500 mt-1">Ogni 30 min</div>
-                                </div>
-                                <div class="relative w-32 h-40 bg-gray-800 rounded-3xl border-4 border-gray-700 flex flex-col items-center justify-center p-4 shadow-2xl">
-                                    <div class="w-8 h-8 rounded-full border-2 border-brand-blue flex items-center justify-center mb-3">
-                                        <i class="fa-solid fa-bolt text-brand-blue text-xs"></i>
-                                    </div>
-                                    <div class="w-full h-1 bg-gray-600 rounded-full mb-2 overflow-hidden">
-                                        <div class="w-2/3 h-full bg-brand-blue rounded-full"></div>
-                                    </div>
-                                    <div class="text-[10px] text-gray-500">Preleva ora</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="absolute -top-10 -right-10 w-64 h-64 bg-brand-blue/30 rounded-full blur-3xl"></div>
-                    <div class="absolute -bottom-10 -left-10 w-48 h-48 bg-blue-400/20 rounded-full blur-3xl"></div>
-                </div>
+        <div class="hidden lg:block">
+          <div class="rounded-3xl border border-gray-800 bg-gray-900/60 p-10 shadow-2xl">
+            <div class="flex items-center gap-4">
+              <div class="w-14 h-14 rounded-2xl bg-brand-blue/20 border border-brand-blue/30 flex items-center justify-center text-brand-blue text-2xl">
+                <i class="fa-solid fa-map-location-dot"></i>
+              </div>
+              <div>
+                <div class="text-xl font-bold">Mappa + Lista</div>
+                <div class="text-gray-400 text-sm">Seleziona un bar e apri le indicazioni.</div>
+              </div>
             </div>
+            <div class="mt-8 text-gray-300 text-sm leading-relaxed">
+              Ora puoi vedere tutte le stazioni nella mappa e, a sinistra, la lista completa dei locali.
+              Tocca un locale per vedere i dettagli e ottenere le indicazioni su Google Maps.
+            </div>
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+  </header>
 
-    <!-- COME FUNZIONA -->
-    <section id="come-funziona" class="py-20 lg:py-28 bg-brand-black border-t border-gray-900">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <h2 class="text-3xl lg:text-4xl font-bold text-white mb-4">Ricaricarsi è semplicissimo</h2>
-                <p class="text-lg text-gray-400">Tre passaggi, zero complicazioni. Paga contactless e inizia a ricaricare in pochi secondi.</p>
-            </div>
-            <div class="grid md:grid-cols-3 gap-8 lg:gap-12">
-                <div class="relative group">
-                    <div class="bg-gray-900 rounded-3xl p-8 lg:p-10 h-full transition-transform duration-300 group-hover:-translate-y-2 border border-gray-800 hover:border-brand-blue/50">
-                        <div class="w-16 h-16 bg-brand-blue rounded-2xl flex items-center justify-center text-white text-2xl mb-6 shadow-lg shadow-brand-blue/30">
-                            <i class="fa-solid fa-credit-card"></i>
-                        </div>
-                        <div class="absolute top-8 right-8 text-6xl font-bold text-gray-800">01</div>
-                        <h3 class="text-xl font-bold mb-3 text-white">Tappa sul POS</h3>
-                        <p class="text-gray-400 leading-relaxed">
-                            Avvicina la tua carta di credito, smartphone o dispositivo contactless al lettore Stripe sulla torretta. 
-                            Accetta il pagamento di <strong class="text-white">1€</strong> ogni 30 minuti.
-                        </p>
-                    </div>
-                    <div class="hidden md:block absolute top-1/2 -right-6 transform -translate-y-1/2 text-brand-blue/30 text-2xl">
-                        <i class="fa-solid fa-chevron-right"></i>
-                    </div>
-                </div>
-                <div class="relative group">
-                    <div class="bg-gray-900 rounded-3xl p-8 lg:p-10 h-full transition-transform duration-300 group-hover:-translate-y-2 border border-gray-800 hover:border-brand-blue/50">
-                        <div class="w-16 h-16 bg-brand-blue rounded-2xl flex items-center justify-center text-white text-2xl mb-6 shadow-lg shadow-brand-blue/30">
-                            <i class="fa-solid fa-hand-holding-hand"></i>
-                        </div>
-                        <div class="absolute top-8 right-8 text-6xl font-bold text-gray-800">02</div>
-                        <h3 class="text-xl font-bold mb-3 text-white">Preleva il powerbank</h3>
-                        <p class="text-gray-400 leading-relaxed">
-                            Una volta pagato, la cassetta si apre automaticamente. 
-                            Prendi il powerbank con il cavo compatibile per il tuo dispositivo (Lightning, Type-C o Micro-USB).
-                        </p>
-                    </div>
-                    <div class="hidden md:block absolute top-1/2 -right-6 transform -translate-y-1/2 text-brand-blue/30 text-2xl">
-                        <i class="fa-solid fa-chevron-right"></i>
-                    </div>
-                </div>
-                <div class="relative group">
-                    <div class="bg-gray-900 rounded-3xl p-8 lg:p-10 h-full transition-transform duration-300 group-hover:-translate-y-2 border border-gray-800 hover:border-brand-blue/50">
-                        <div class="w-16 h-16 bg-brand-blue rounded-2xl flex items-center justify-center text-white text-2xl mb-6 shadow-lg shadow-brand-blue/30">
-                            <i class="fa-solid fa-map-location-dot"></i>
-                        </div>
-                        <div class="absolute top-8 right-8 text-6xl font-bold text-gray-800">03</div>
-                        <h3 class="text-xl font-bold mb-3 text-white">Riconsegna Ovunque</h3>
-                        <p class="text-gray-400 leading-relaxed">
-                            Ricarica il tuo dispositivo e riconsegnalo in qualsiasi altra stazione PLUGHUB della rete. 
-                            Non serve tornare al punto di partenza.
-                        </p>
-                    </div>
-                </div>
-            </div>
+  <!-- MAPPA -->
+  <section id="mappa" class="py-16 bg-gray-900 border-t border-gray-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-6 mb-6">
+        <div>
+          <h2 class="text-3xl lg:text-4xl font-bold text-white">Stazioni PLUGHUB</h2>
+          <p class="text-gray-400 mt-2 max-w-2xl">
+            Lista a sinistra, mappa a destra. Clicca un locale per vedere i dettagli e aprire le indicazioni.
+          </p>
         </div>
-    </section>
-
-    <!-- MAPPA GOOGLE MAPS DINAMICA -->
-    <section id="mappa" class="py-20 bg-gray-900 border-t border-gray-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl lg:text-4xl font-bold text-white mb-4">Trova una stazione in Italia</h2>
-                <p class="text-lg text-gray-400 max-w-2xl mx-auto">
-                    Le nostre torri sono posizionate nei migliori bar, ristoranti e locali del centro storico e della provincia.
-                </p>
-            </div>
-
-            <div class="relative w-full h-[500px] lg:h-[600px] bg-gray-800 rounded-3xl overflow-hidden shadow-2xl border border-gray-700">
-                
-                <!-- Map Overlay (blocks access until cookies accepted) -->
-                <div id="map-overlay" class="map-overlay">
-                    <div class="w-20 h-20 bg-gray-800 rounded-full flex items-center justify-center mb-6">
-                        <i class="fa-solid fa-map-location-dot text-brand-blue text-3xl"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-white mb-4 text-center">Mappa delle Stazioni</h3>
-                    <p class="text-gray-400 text-center max-w-md mb-6 px-4">
-                        Per visualizzare la mappa interattiva con le stazioni PLUGHUB, è necessario accettare i cookie di terze parti (Google Maps).
-                    </p>
-                    <button onclick="acceptCookies()" class="btn-blue px-8 py-3 rounded-full font-bold">
-                        Accetta Cookie e Visualizza Mappa
-                    </button>
-                    <a href="cookie-policy.html" class="text-brand-blue hover:underline text-sm mt-4">
-                        Leggi la Cookie Policy
-                    </a>
-                </div>
-
-                <!-- Search Overlay -->
-                <div class="absolute top-6 left-1/2 transform -translate-x-1/2 w-full max-w-lg px-4 z-10">
-                    <div class="bg-gray-900 rounded-full shadow-2xl p-2 flex items-center border border-gray-700">
-                        <div class="pl-4 text-gray-500">
-                            <i class="fa-solid fa-magnifying-glass text-lg"></i>
-                        </div>
-                        <input 
-                            type="text" 
-                            placeholder="Cerca via o locale..." 
-                            class="w-full px-4 py-3 outline-none text-white placeholder-gray-500 font-medium bg-transparent"
-                            id="map-search"
-                        >
-                        <button onclick="alert('Funzione di ricerca in sviluppo')" class="bg-brand-blue text-white px-6 py-3 rounded-full font-bold hover:bg-blue-400 transition-colors">
-                            Cerca
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Google Maps Canvas (Dynamic Map) -->
-                <div id="map-canvas"></div>
-
-                <!-- Map Controls -->
-                <div class="absolute right-6 top-24 flex flex-col gap-2 z-10">
-                    <button class="w-12 h-12 bg-gray-900 rounded-lg shadow-lg flex items-center justify-center text-white hover:text-brand-blue transition-colors text-xl font-bold border border-gray-700" onclick="mapZoomIn()">
-                        <i class="fa-solid fa-plus"></i>
-                    </button>
-                    <button class="w-12 h-12 bg-gray-900 rounded-lg shadow-lg flex items-center justify-center text-white hover:text-brand-blue transition-colors text-xl font-bold border border-gray-700" onclick="mapZoomOut()">
-                        <i class="fa-solid fa-minus"></i>
-                    </button>
-                    <button class="w-12 h-12 bg-gray-900 rounded-lg shadow-lg flex items-center justify-center text-white hover:text-brand-blue transition-colors text-xl border border-gray-700" onclick="mapRecenter()">
-                        <i class="fa-solid fa-crosshairs"></i>
-                    </button>
-                </div>
-
-                <!-- Legend -->
-                <div class="absolute bottom-6 left-6 bg-gray-900 rounded-xl p-4 shadow-xl z-10 max-w-xs border border-gray-700">
-                    <h4 class="font-bold text-sm mb-2 text-white">Legenda</h4>
-                    <div class="space-y-2 text-gray-300">
-                        <div class="flex items-center gap-2 text-sm">
-                            <span class="w-3 h-3 bg-brand-blue rounded-full"></span>
-                            <span>Stazione disponibile</span>
-                        </div>
-                        <div class="flex items-center gap-2 text-sm">
-                            <span class="w-3 h-3 bg-gray-600 rounded-full"></span>
-                            <span>Stazione piena</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="flex items-center gap-3">
+          <button id="btn-fit-all" class="btn-gray px-5 py-3 rounded-full font-bold text-sm">
+            <i class="fa-solid fa-expand mr-2"></i>Mostra tutte
+          </button>
         </div>
-    </section>
+      </div>
 
-    <!-- PREZZI -->
-    <section id="prezzi" class="py-20 bg-brand-black border-t border-gray-900">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <h2 class="text-3xl lg:text-4xl font-bold text-white mb-4">Tariffe trasparenti</h2>
-                <p class="text-lg text-gray-400">Paga solo per il tempo che utilizzi. Niente abbonamenti, niente sorprese.</p>
+      <!-- Split layout: LIST (left) + MAP (right) -->
+      <div class="map-shell rounded-3xl overflow-hidden border border-gray-700 shadow-2xl bg-gray-800">
+        <!-- Left list -->
+        <aside class="station-sidebar bg-gray-900/95 border-b lg:border-b-0 lg:border-r border-gray-800">
+          <div class="p-4 border-b border-gray-800">
+            <div class="flex items-center justify-between">
+              <div class="font-bold text-white">Locali</div>
+              <div class="text-xs text-gray-400"><span id="station-count">—</span> totali</div>
             </div>
-            <div class="bg-gray-900 rounded-3xl p-8 lg:p-12 border-2 border-brand-blue/30 relative overflow-hidden">
-                <div class="absolute top-0 right-0 bg-brand-blue text-white text-xs font-bold px-4 py-2 rounded-bl-2xl">PAGA E USA</div>
-                <div class="grid md:grid-cols-2 gap-8 items-center">
-                    <div class="text-center md:text-left">
-                        <div class="w-20 h-20 bg-gray-800 rounded-full flex items-center justify-center text-brand-blue text-3xl mb-6 shadow-lg mx-auto md:mx-0 border border-gray-700">
-                            <i class="fa-solid fa-clock"></i>
-                        </div>
-                        <h3 class="text-2xl font-bold mb-4 text-white">Tariffa oraria</h3>
-                        <ul class="space-y-3 text-gray-400">
-                            <li class="flex items-center gap-3 justify-center md:justify-start">
-                                <i class="fa-solid fa-check text-brand-blue"></i>
-                                <span><strong class="text-white">1€</strong> ogni 30 minuti</span>
-                            </li>
-                            <li class="flex items-center gap-3 justify-center md:justify-start">
-                                <i class="fa-solid fa-check text-brand-blue"></i>
-                                <span>Tariffa semplice e trasparente</span>
-                            </li>
-                            <li class="flex items-center gap-3 justify-center md:justify-start">
-                                <i class="fa-solid fa-check text-brand-blue"></i>
-                                <span>Pagamento al momento del prelievo</span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="bg-gray-800 rounded-2xl p-8 text-center shadow-xl border border-gray-700">
-                        <div class="text-sm text-gray-400 mb-2">Tariffa</div>
-                        <div class="text-6xl font-bold text-white mb-2">1<span class="text-3xl">€</span></div>
-                        <div class="text-gray-400 mb-6">Ogni 30 minuti</div>
-                        <div class="border-t border-gray-700 pt-4">
-                            <div class="text-sm text-gray-400">Semplice e trasparente</div>
-                            <div class="text-2xl font-bold text-brand-blue">1€ <span class="text-sm font-normal text-gray-400">/ 30min</span></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-8 pt-6 border-t border-gray-800 text-center">
-                    <p class="text-sm text-gray-500">
-                        <i class="fa-solid fa-circle-info text-brand-blue mr-2"></i>
-                        In caso di mancata restituzione entro 24 ore, vedi le condizioni nella sezione <a href="#faq" class="text-brand-blue hover:underline font-semibold">FAQ</a>.
-                    </p>
-                </div>
+            <div class="mt-2 text-xs text-gray-500">
+              Suggerimento: consenti la posizione per vedere le distanze.
             </div>
-            <div class="mt-12 text-center">
-                <p class="text-sm font-semibold text-gray-400 mb-4">Pagamento sicuro tramite POS contactless</p>
-                <div class="inline-flex flex-wrap items-center justify-center gap-6 bg-gray-900 px-8 py-4 rounded-2xl border border-gray-800">
-                    <i class="fa-brands fa-cc-apple-pay text-4xl text-white"></i>
-                    <i class="fa-brands fa-google-pay text-4xl text-white"></i>
-                    <i class="fa-brands fa-cc-visa text-3xl text-white"></i>
-                    <i class="fa-brands fa-cc-mastercard text-3xl text-white"></i>
-                </div>
+          </div>
+
+          <ul id="station-list" class="station-list custom-scrollbar"></ul>
+        </aside>
+
+        <!-- Right map -->
+        <div class="map-area relative">
+          <div id="map-canvas" class="map-canvas"></div>
+
+          <!-- Map overlay (only covers the map area) -->
+          <div id="map-overlay" class="map-overlay">
+            <div class="w-20 h-20 bg-gray-800 rounded-full flex items-center justify-center mb-6 border border-gray-700">
+              <i class="fa-solid fa-map-location-dot text-brand-blue text-3xl"></i>
             </div>
+            <h3 class="text-2xl font-bold text-white mb-3 text-center">Mappa disattivata</h3>
+            <p class="text-gray-400 text-center max-w-md mb-6 px-4">
+              Per visualizzare la mappa interattiva, accetta i cookie di terze parti (Google Maps).
+              La lista dei locali resta sempre disponibile.
+            </p>
+            <button id="btn-accept-overlay" class="btn-blue px-8 py-3 rounded-full font-bold">
+              Accetta e visualizza la mappa
+            </button>
+            <a href="cookie-policy.html" class="text-brand-blue hover:underline text-sm mt-4">
+              Leggi la Cookie Policy
+            </a>
+          </div>
+
+          <!-- Map controls -->
+          <div class="absolute right-4 top-4 flex flex-col gap-2 z-10">
+            <button class="map-btn" id="btn-zoom-in" aria-label="Zoom in"><i class="fa-solid fa-plus"></i></button>
+            <button class="map-btn" id="btn-zoom-out" aria-label="Zoom out"><i class="fa-solid fa-minus"></i></button>
+            <button class="map-btn" id="btn-recenter" aria-label="Recenter"><i class="fa-solid fa-crosshairs"></i></button>
+          </div>
+
+          <!-- Station card overlay (like screenshot) -->
+          <div id="station-card" class="station-card hidden" role="dialog" aria-modal="true" aria-label="Dettagli locale">
+            <div class="relative">
+              <img id="card-photo" class="h-44 w-full object-cover bg-gray-900" alt="" />
+              <button id="card-close" class="card-close" aria-label="Chiudi">
+                <i class="fa-solid fa-xmark"></i>
+              </button>
+            </div>
+
+            <div class="p-5">
+              <h3 id="card-title" class="text-lg font-bold mb-2"></h3>
+
+              <div class="space-y-2 text-[13px] text-gray-600">
+                <div class="flex items-start gap-2">
+                  <i class="fa-solid fa-location-dot mt-0.5 text-gray-500"></i>
+                  <div id="card-address"></div>
+                </div>
+
+                <div id="card-distance-row" class="flex items-center gap-2 hidden">
+                  <i class="fa-solid fa-route text-gray-500"></i>
+                  <div id="card-distance"></div>
+                </div>
+
+                <div id="card-hours-row" class="flex items-center gap-2 hidden">
+                  <i class="fa-regular fa-clock text-gray-500"></i>
+                  <div id="card-hours"></div>
+                </div>
+
+                <div id="card-price-row" class="flex items-center gap-2">
+                  <i class="fa-solid fa-euro-sign text-gray-500"></i>
+                  <div id="card-price">1€ / 30 min</div>
+                </div>
+
+                <div id="card-payments-row" class="text-gray-500">
+                  Pagamento: <span id="card-payments" class="text-gray-700">Carta, App</span>
+                </div>
+
+                <div id="card-availability" class="mt-2 font-semibold text-[#1d4ed8]">
+                  <i class="fa-solid fa-bolt"></i>
+                  <span id="card-available">—</span> powerbank disponibili
+                </div>
+              </div>
+
+              <a id="card-directions" target="_blank" class="card-directions">
+                <i class="fa-solid fa-location-arrow"></i>
+                Indicazioni
+              </a>
+            </div>
+          </div>
         </div>
-    </section>
+      </div>
 
-    <!-- PER I LOCALI -->
-    <section id="per-locali" class="py-20 lg:py-28 bg-gray-900 text-white relative overflow-hidden border-t border-gray-800">
-        <div class="absolute inset-0 opacity-10">
-            <div class="absolute inset-0" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 40px 40px;"></div>
+      <p class="text-xs text-gray-500 mt-4">
+        Nota: la chiave API Google Maps è visibile lato client (come tutti i siti statici). Proteggila con restrizioni per referrer nel Google Cloud Console.
+      </p>
+    </div>
+  </section>
+
+  <!-- PREZZI -->
+  <section id="prezzi" class="py-16 bg-brand-black border-t border-gray-900">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <h2 class="text-3xl lg:text-4xl font-bold text-white mb-4">Tariffe trasparenti</h2>
+        <p class="text-lg text-gray-400">Paga solo per il tempo che utilizzi. Niente abbonamenti, niente sorprese.</p>
+      </div>
+
+      <div class="bg-gray-900 rounded-3xl p-8 lg:p-12 border border-gray-800 relative overflow-hidden">
+        <div class="absolute top-0 right-0 bg-brand-blue text-white text-xs font-bold px-4 py-2 rounded-bl-2xl">PAGA E USA</div>
+        <div class="grid md:grid-cols-2 gap-8 items-center">
+          <div>
+            <h3 class="text-2xl font-bold mb-4 text-white">Tariffa</h3>
+            <ul class="space-y-3 text-gray-400">
+              <li class="flex items-center gap-3">
+                <i class="fa-solid fa-check text-brand-blue"></i>
+                <span><strong class="text-white">1€</strong> ogni 30 minuti</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <i class="fa-solid fa-check text-brand-blue"></i>
+                <span>Pagamento al momento del prelievo</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <i class="fa-solid fa-check text-brand-blue"></i>
+                <span>Restituisci in qualunque stazione</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="bg-gray-800 rounded-2xl p-8 text-center shadow-xl border border-gray-700">
+            <div class="text-sm text-gray-400 mb-2">Tariffa</div>
+            <div class="text-6xl font-bold text-white mb-2">1<span class="text-3xl">€</span></div>
+            <div class="text-gray-400 mb-6">Ogni 30 minuti</div>
+            <div class="border-t border-gray-700 pt-4">
+              <div class="text-sm text-gray-400">Semplice e trasparente</div>
+              <div class="text-2xl font-bold text-brand-blue">1€ <span class="text-sm font-normal text-gray-400">/ 30min</span></div>
+            </div>
+          </div>
         </div>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="grid lg:grid-cols-2 gap-16 items-center">
-                <div>
-                    <div class="inline-block px-4 py-2 bg-brand-blue/20 text-brand-blue rounded-full text-sm font-bold mb-6 tracking-wide uppercase border border-brand-blue/30">Partnership</div>
-                    <h2 class="text-3xl lg:text-5xl font-bold mb-6 leading-tight">Ospita PLUGHUB nel tuo locale</h2>
-                    <p class="text-lg text-gray-400 mb-10 leading-relaxed">
-                        Offri un servizio utile ai tuoi clienti e aumenta il valore percepito del tuo business. 
-                        Installazione e manutenzione completamente gratuite.
-                    </p>
-                    <div class="grid sm:grid-cols-2 gap-6 mb-10">
-                        <div class="flex items-start gap-4">
-                            <div class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center text-brand-blue flex-shrink-0">
-                                <i class="fa-solid fa-users text-xl"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-lg mb-1 text-white">Attrai Clienti</h4>
-                                <p class="text-sm text-gray-400">Diventa un punto di riferimento per chi cerca una ricarica</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start gap-4">
-                            <div class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center text-brand-blue flex-shrink-0">
-                                <i class="fa-solid fa-clock text-xl"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-lg mb-1 text-white">Aumenta la Permanenza</h4>
-                                <p class="text-sm text-gray-400">I clienti restano più tempo consumando mentre caricano</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start gap-4">
-                            <div class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center text-brand-blue flex-shrink-0">
-                                <i class="fa-solid fa-gift text-xl"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-lg mb-1 text-white">Zero Costi</h4>
-                                <p class="text-sm text-gray-400">Nessun investimento iniziale né spese di gestione</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start gap-4">
-                            <div class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center text-brand-blue flex-shrink-0">
-                                <i class="fa-solid fa-handshake text-xl"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-lg mb-1 text-white">Guadagno Condiviso</h4>
-                                <p class="text-sm text-gray-400">Genera entrate passivate su ogni noleggio</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex flex-col sm:flex-row gap-4">
-                        <a href="#contatti" class="btn-blue px-8 py-4 rounded-full font-bold hover:shadow-lg transition-all flex items-center justify-center gap-3">
-                            Richiedi Informazioni<i class="fa-solid fa-arrow-right"></i>
-                        </a>
-                        <a href="mailto:weesrl.info@gmail.com" class="text-gray-400 hover:text-white px-8 py-4 font-semibold flex items-center justify-center gap-2 transition-colors border border-gray-600 rounded-full hover:border-white hover:bg-white hover:text-gray-900">
-                            <i class="fa-solid fa-envelope"></i>Scrivici
-                        </a>
-                    </div>
-                </div>
-                <div class="relative">
-                    <div class="relative bg-gradient-to-br from-gray-800 to-black rounded-3xl p-8 border border-gray-700 shadow-2xl">
-                        <div class="bg-gray-900 rounded-2xl p-6 border border-gray-700">
-                            <div class="flex justify-between items-center mb-6 pb-4 border-b border-gray-700">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-10 h-10 bg-brand-blue rounded-lg flex items-center justify-center">
-                                        <i class="fa-solid fa-bolt text-white"></i>
-                                    </div>
-                                    <span class="font-bold text-lg text-white">Torretta PLUGHUB</span>
-                                </div>
-                                <div class="flex gap-1">
-                                    <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                                    <span class="text-xs text-gray-400">Attiva</span>
-                                </div>
-                            </div>
-                            <div class="grid grid-cols-4 gap-3 mb-6">
-                                <div class="aspect-[3/4] bg-gray-800 rounded-lg border-2 border-green-500/30 flex flex-col items-center justify-center p-2">
-                                    <i class="fa-solid fa-battery-full text-green-500 text-xl mb-2"></i>
-                                    <span class="text-[10px] text-gray-500">Libero</span>
-                                </div>
-                                <div class="aspect-[3/4] bg-gray-800 rounded-lg border-2 border-brand-blue/30 flex flex-col items-center justify-center p-2">
-                                    <i class="fa-solid fa-battery-half text-brand-blue text-xl mb-2"></i>
-                                    <span class="text-[10px] text-gray-500">In uso</span>
-                                </div>
-                                <div class="aspect-[3/4] bg-gray-800 rounded-lg border-2 border-gray-700 flex flex-col items-center justify-center p-2">
-                                    <i class="fa-solid fa-box-open text-gray-600 text-xl mb-2"></i>
-                                    <span class="text-[10px] text-gray-500">Vuoto</span>
-                                </div>
-                                <div class="aspect-[3/4] bg-gray-800 rounded-lg border-2 border-green-500/30 flex flex-col items-center justify-center p-2">
-                                    <i class="fa-solid fa-battery-full text-green-500 text-xl mb-2"></i>
-                                    <span class="text-[10px] text-gray-500">Libero</span>
-                                </div>
-                            </div>
-                            <div class="bg-black/50 rounded-xl p-4 border border-gray-700">
-                                <div class="flex justify-between items-center mb-2">
-                                    <span class="text-gray-400 text-sm">Ultimo pagamento</span>
-                                    <span class="text-white font-bold">1.00 €</span>
-                                </div>
-                                <div class="flex justify-between text-xs text-gray-500">
-                                    <span>POS Stripe</span>
-                                    <span>Contactless</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="absolute -bottom-6 -right-6 bg-gray-900 text-white p-4 rounded-2xl shadow-xl border border-gray-700">
-                            <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 bg-brand-blue/20 rounded-full flex items-center justify-center text-brand-blue">
-                                    <i class="fa-solid fa-store"></i>
-                                </div>
-                                <div>
-                                    <div class="text-xs text-gray-400 font-semibold">Tipo di locale</div>
-                                    <div class="text-sm font-bold text-white">Bar, Ristoranti, Hotel</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      </div>
+
+      <div class="mt-10 text-center">
+        <p class="text-sm font-semibold text-gray-400 mb-4">Pagamento sicuro tramite POS contactless</p>
+        <div class="inline-flex flex-wrap items-center justify-center gap-6 bg-gray-900 px-8 py-4 rounded-2xl border border-gray-800">
+          <i class="fa-brands fa-cc-apple-pay text-4xl text-white"></i>
+          <i class="fa-brands fa-google-pay text-4xl text-white"></i>
+          <i class="fa-brands fa-cc-visa text-3xl text-white"></i>
+          <i class="fa-brands fa-cc-mastercard text-3xl text-white"></i>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- SICUREZZA E QUALITÀ -->
-    <section id="sicurezza" class="py-20 bg-brand-black border-t border-gray-900">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold text-white mb-4">Sicurezza e Qualità Garantite</h2>
-                <p class="text-gray-400 max-w-2xl mx-auto">
-                    Utilizziamo solo batterie agli ioni di litio di ultima generazione con certificazioni internazionali.
-                </p>
+  <!-- PER I LOCALI -->
+  <section id="per-locali" class="py-16 bg-gray-900 border-t border-gray-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <div class="inline-block px-4 py-2 bg-brand-blue/20 text-brand-blue rounded-full text-sm font-bold mb-6 tracking-wide uppercase border border-brand-blue/30">Partnership</div>
+          <h2 class="text-3xl lg:text-5xl font-bold mb-6 leading-tight">Ospita PLUGHUB nel tuo locale</h2>
+          <p class="text-lg text-gray-400 mb-10 leading-relaxed">
+            Installazione a costo zero. Commissione su ogni noleggio. Zero gestione per lo staff.
+          </p>
+
+          <div class="grid sm:grid-cols-2 gap-6">
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center text-brand-blue flex-shrink-0">
+                <i class="fa-solid fa-users text-xl"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-lg mb-1 text-white">Attrai clienti</h4>
+                <p class="text-sm text-gray-400">Un servizio utile che aumenta il valore percepito.</p>
+              </div>
             </div>
-            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                <div class="bg-gray-900 rounded-2xl p-8 shadow-sm border border-gray-800 flex items-start gap-6">
-                    <div class="w-16 h-16 bg-brand-blue/10 rounded-2xl flex items-center justify-center text-brand-blue text-2xl flex-shrink-0 border border-brand-blue/20">
-                        <i class="fa-solid fa-shield-halved"></i>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-bold mb-2 text-white">Certificazioni CE</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed">
-                            Tutti i nostri powerbank sono testati e certificati secondo gli standard europei di sicurezza. 
-                            Batterie di grado A+ con protezione da sovraccarico e surriscaldamento.
-                        </p>
-                    </div>
-                </div>
-                <div class="bg-gray-900 rounded-2xl p-8 shadow-sm border border-gray-800 flex items-start gap-6">
-                    <div class="w-16 h-16 bg-brand-blue/10 rounded-2xl flex items-center justify-center text-brand-blue text-2xl flex-shrink-0 border border-brand-blue/20">
-                        <i class="fa-solid fa-plug"></i>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-bold mb-2 text-white">Cavi Universali</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed">
-                            Ogni powerbank include tre connettori: Lightning (Apple), USB-C e Micro-USB. 
-                            Compatibile al 100% con qualsiasi smartphone o dispositivo mobile.
-                        </p>
-                    </div>
-                </div>
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center text-brand-blue flex-shrink-0">
+                <i class="fa-solid fa-handshake text-xl"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-lg mb-1 text-white">Guadagno condiviso</h4>
+                <p class="text-sm text-gray-400">Entrate su ogni noleggio senza investimenti.</p>
+              </div>
             </div>
-            <div class="mt-12 flex flex-wrap justify-center items-center gap-8 opacity-40">
-                <div class="flex items-center gap-2 font-bold text-xl text-gray-500">
-                    <i class="fa-solid fa-certificate text-2xl"></i> CE Certified
-                </div>
-                <div class="flex items-center gap-2 font-bold text-xl text-gray-500">
-                    <i class="fa-solid fa-leaf text-2xl"></i> ECO Friendly
-                </div>
-                <div class="flex items-center gap-2 font-bold text-xl text-gray-500">
-                    <i class="fa-solid fa-lock text-2xl"></i> GDPR Ready
-                </div>
-            </div>
+          </div>
+
+          <div class="mt-10 flex flex-col sm:flex-row gap-3">
+            <a href="#contatti" class="btn-blue px-8 py-4 rounded-full font-bold text-center">Contattaci</a>
+            <a href="#mappa" class="btn-white-outline px-8 py-4 rounded-full font-bold text-center">Vedi la mappa</a>
+          </div>
         </div>
-    </section>
 
-    <!-- FAQ -->
-    <section id="faq" class="py-20 bg-gray-900 border-t border-gray-800">
-        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl lg:text-4xl font-bold text-white mb-4">Domande Frequenti</h2>
-                <p class="text-gray-400">Tutto ciò che devi sapere su PLUGHUB</p>
-            </div>
-            <div class="space-y-4">
-                <div class="faq-item border border-gray-700 rounded-2xl overflow-hidden bg-gray-800/50">
-                    <button class="w-full px-6 py-5 text-left flex justify-between items-center bg-gray-800 hover:bg-gray-700 transition-colors" onclick="toggleFaq(this)">
-                        <span class="font-bold text-lg text-white">Quanto costa noleggiare un powerbank?</span>
-                        <i class="faq-icon fa-solid fa-chevron-down text-brand-blue transition-transform duration-300"></i>
-                    </button>
-                    <div class="faq-answer bg-gray-900 px-6">
-                        <p class="text-gray-400 pb-5 leading-relaxed">
-                            Il costo è di <strong class="text-white">1€ ogni 30 minuti</strong> di utilizzo. Il pagamento viene effettuato immediatamente al momento del prelievo 
-                            tramite il POS contactless presente sulla torretta. Tariffa semplice e trasparente, senza sorprese.
-                        </p>
-                    </div>
-                </div>
-                <div class="faq-item border border-gray-700 rounded-2xl overflow-hidden bg-gray-800/50">
-                    <button class="w-full px-6 py-5 text-left flex justify-between items-center bg-gray-800 hover:bg-gray-700 transition-colors" onclick="toggleFaq(this)">
-                        <span class="font-bold text-lg text-white">Come si paga? Serve l'app?</span>
-                        <i class="faq-icon fa-solid fa-chevron-down text-brand-blue transition-transform duration-300"></i>
-                    </button>
-                    <div class="faq-answer bg-gray-900 px-6">
-                        <p class="text-gray-400 pb-5 leading-relaxed">
-                            <strong class="text-white">Non serve alcuna app!</strong> Sulle nostre torrette è installato un POS Stripe professionale. 
-                            Basta avvicinare la tua carta di credito, bancomat contactless, smartphone (Apple Pay/Google Pay) 
-                            o smartwatch al lettore. Una volta pagato, la cassetta si apre automaticamente.
-                        </p>
-                    </div>
-                </div>
-                <div class="faq-item border border-gray-700 rounded-2xl overflow-hidden bg-gray-800/50">
-                    <button class="w-full px-6 py-5 text-left flex justify-between items-center bg-gray-800 hover:bg-gray-700 transition-colors" onclick="toggleFaq(this)">
-                        <span class="font-bold text-lg text-white">Dove posso riconsegnare il powerbank?</span>
-                        <i class="faq-icon fa-solid fa-chevron-down text-brand-blue transition-transform duration-300"></i>
-                    </button>
-                    <div class="faq-answer bg-gray-900 px-6">
-                        <p class="text-gray-400 pb-5 leading-relaxed">
-                            Puoi riconsegnare il powerbank in <strong class="text-white">qualsiasi stazione PLUGHUB</strong> della rete, 
-                            non necessariamente in quella dove l'hai prelevato. Consulta la mappa per trovare il punto di riconsegna più vicino.
-                        </p>
-                    </div>
-                </div>
-                <div class="faq-item border border-gray-700 rounded-2xl overflow-hidden bg-gray-800/50">
-                    <button class="w-full px-6 py-5 text-left flex justify-between items-center bg-gray-800 hover:bg-gray-700 transition-colors" onclick="toggleFaq(this)">
-                        <span class="font-bold text-lg text-white">Cosa succede se non riconsegno il powerbank?</span>
-                        <i class="faq-icon fa-solid fa-chevron-down text-brand-blue transition-transform duration-300"></i>
-                    </button>
-                    <div class="faq-answer bg-gray-900 px-6">
-                        <p class="text-gray-400 pb-5 leading-relaxed">
-                            Se non riconsegui il powerbank entro <strong class="text-white">24 ore</strong> dal prelievo, ti verrà addebitata automaticamente 
-                            sulla carta utilizzata una penale di <strong class="text-white">30€</strong>. In questo caso il dispositivo diventa di tua proprietà.
-                        </p>
-                    </div>
-                </div>
-                <div class="faq-item border border-gray-700 rounded-2xl overflow-hidden bg-gray-800/50">
-                    <button class="w-full px-6 py-5 text-left flex justify-between items-center bg-gray-800 hover:bg-gray-700 transition-colors" onclick="toggleFaq(this)">
-                        <span class="font-bold text-lg text-white">Sono un proprietario di locale: quanto tempo ci vuole per l'installazione?</span>
-                        <i class="faq-icon fa-solid fa-chevron-down text-brand-blue transition-transform duration-300"></i>
-                    </button>
-                    <div class="faq-answer bg-gray-900 px-6">
-                        <p class="text-gray-400 pb-5 leading-relaxed">
-                            L'installazione è immediata: basta una presa elettrica standard. Il nostro tecnico posiziona la torretta 
-                            in 10 minuti e ti spiega il funzionamento. Non serve WiFi dedicato, il dispositivo ha connettività integrata.
-                        </p>
-                    </div>
-                </div>
-            </div>
+        <div class="bg-gray-800 rounded-3xl p-8 border border-gray-700 shadow-xl">
+          <h3 class="text-xl font-bold mb-4">Cosa serve?</h3>
+          <ul class="space-y-3 text-gray-300">
+            <li class="flex gap-3"><i class="fa-solid fa-check text-brand-blue mt-1"></i><span>Un punto vicino alla cassa (visibile)</span></li>
+            <li class="flex gap-3"><i class="fa-solid fa-check text-brand-blue mt-1"></i><span>Una presa di corrente</span></li>
+            <li class="flex gap-3"><i class="fa-solid fa-check text-brand-blue mt-1"></i><span>Stop: lo staff non gestisce nulla</span></li>
+          </ul>
+          <div class="mt-6 text-sm text-gray-400">
+            Scrivici e ti mandiamo una proposta in 2 minuti.
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- CONTATTI -->
-    <section id="contatti" class="py-20 bg-brand-black border-t border-gray-900">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="max-w-xl mx-auto text-center">
-                <h2 class="text-3xl lg:text-4xl font-bold text-white mb-6">Contattaci</h2>
-                <p class="text-gray-400 mb-10 leading-relaxed">
-                    Hai bisogno di assistenza o vuoi proporre il tuo locale? 
-                    Siamo in Italia e rispondiamo entro 24 ore.
-                </p>
-                <div class="flex items-center justify-center gap-4 bg-gray-900 rounded-2xl p-8 border border-gray-800">
-                    <div class="w-14 h-14 bg-brand-blue rounded-xl flex items-center justify-center text-white text-2xl flex-shrink-0">
-                        <i class="fa-solid fa-envelope"></i>
-                    </div>
-                    <div class="text-left">
-                        <h4 class="font-bold text-lg mb-1 text-white">Email</h4>
-                        <a href="mailto:weesrl.info@gmail.com" class="text-brand-blue hover:underline text-lg">weesrl.info@gmail.com</a>
-                    </div>
-                </div>
-            </div>
+  <!-- FAQ -->
+  <section id="faq" class="py-16 bg-brand-black border-t border-gray-900">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-10">
+        <h2 class="text-3xl lg:text-4xl font-bold text-white">FAQ</h2>
+        <p class="text-gray-400 mt-2">Risposte rapide alle domande più comuni.</p>
+      </div>
+
+      <div class="space-y-4">
+        <div class="faq-item bg-gray-900 border border-gray-800 rounded-2xl p-5">
+          <button class="w-full flex items-center justify-between text-left" data-faq>
+            <span class="font-bold">Come funziona?</span>
+            <i class="fa-solid fa-chevron-down faq-icon transition-transform"></i>
+          </button>
+          <div class="faq-answer text-gray-400">
+            Ritiri un powerbank in una stazione e lo restituisci in qualunque altra. Paghi in base al tempo.
+          </div>
         </div>
-    </section>
 
-    <!-- FOOTER -->
-    <footer class="bg-black text-white pt-16 pb-8 border-t border-gray-900">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid md:grid-cols-4 gap-12 mb-12">
-                <div class="col-span-1 md:col-span-1">
-                    <div class="flex items-center mb-6">
-                        <div class="w-10 h-12 mr-3 flex items-center justify-center">
-                            <img src="logo.png" alt="PLUGHUB" class="w-full h-full object-contain">
-                        </div>
-                        <span class="font-bold text-2xl tracking-tight">
-                            <span class="text-white">PLUG</span><span class="text-brand-blue">HUB</span>
-                        </span>
-                    </div>
-                    <p class="text-gray-500 text-sm leading-relaxed mb-6">
-                        Il primo servizio di power bank sharing in Italia. 
-                        Ricarica ovunque, in qualsiasi momento.
-                    </p>
-                </div>
-                <div>
-                    <h4 class="font-bold text-lg mb-6 text-white">Azienda</h4>
-                    <ul class="space-y-3 text-gray-500 text-sm">
-                        <li><a href="#come-funziona" class="hover:text-brand-blue transition-colors">Come Funziona</a></li>
-                        <li><a href="#mappa" class="hover:text-brand-blue transition-colors">Mappa Stazioni</a></li>
-                        <li><a href="#per-locali" class="hover:text-brand-blue transition-colors">Per i Locali</a></li>
-                        <li><a href="#faq" class="hover:text-brand-blue transition-colors">FAQ</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold text-lg mb-6 text-white">Legale</h4>
-                    <ul class="space-y-3 text-gray-500 text-sm">
-                        <li><a href="privacy-policy.html" class="hover:text-brand-blue transition-colors">Privacy Policy</a></li>
-                        <li><a href="cookie-policy.html" class="hover:text-brand-blue transition-colors">Cookie Policy</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold text-lg mb-6 text-white">Contatti</h4>
-                    <ul class="space-y-3 text-gray-500 text-sm">
-                        <li class="flex items-center gap-3">
-                            <i class="fa-solid fa-envelope text-brand-blue text-xs"></i>
-                            weesrl.info@gmail.com
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="border-t border-gray-900 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-                <div class="text-gray-600 text-sm text-center md:text-left">
-                    <p class="font-semibold text-gray-400 mb-1">PLUGHUB è un brand di Wee S.R.L.S.</p>
-                    <p>Wee S.R.L.S. | Sede Legale: [Indirizzo, CAP, Città, Prov] | P.IVA [Tua P.IVA] | REA: [Tuo Numero REA] | Ctale Sociale: [Importo] € i.v. | PEC: [Tua PEC]</p>
-                    <p class="mt-1">Tutti i diritti riservati © 2026</p>
-                </div>
-            </div>
+        <div class="faq-item bg-gray-900 border border-gray-800 rounded-2xl p-5">
+          <button class="w-full flex items-center justify-between text-left" data-faq>
+            <span class="font-bold">Devo installare un’app?</span>
+            <i class="fa-solid fa-chevron-down faq-icon transition-transform"></i>
+          </button>
+          <div class="faq-answer text-gray-400">
+            Dipende dal flusso di pagamento scelto. In generale puoi pagare con carta / app.
+          </div>
         </div>
-    </footer>
 
-    <!-- JAVASCRIPT -->
-    <script>
-        // ============================================
-        // CONFIGURAZIONE - INSERISCI QUI LA TUA API KEY
-        // ============================================
-        const GOOGLE_MAPS_API_KEY = 'AIzaSyA9JYajFqRA8BSVOLtJAzKIkMtlZ3cJBuI';
-        
-        // ============================================
-        // MOBILE MENU
-        // ============================================
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        let isMenuOpen = false;
+        <div class="faq-item bg-gray-900 border border-gray-800 rounded-2xl p-5">
+          <button class="w-full flex items-center justify-between text-left" data-faq>
+            <span class="font-bold">La mappa non si vede: perché?</span>
+            <i class="fa-solid fa-chevron-down faq-icon transition-transform"></i>
+          </button>
+          <div class="faq-answer text-gray-400">
+            La mappa usa Google Maps e richiede il consenso ai cookie di terze parti. La lista rimane sempre visibile.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        mobileMenuBtn.addEventListener('click', () => {
-            isMenuOpen = !isMenuOpen;
-            if (isMenuOpen) {
-                mobileMenu.classList.remove('hidden');
-                mobileMenuBtn.innerHTML = '<i class="fa-solid fa-xmark text-2xl"></i>';
-            } else {
-                mobileMenu.classList.add('hidden');
-                mobileMenuBtn.innerHTML = '<i class="fa-solid fa-bars text-2xl"></i>';
-            }
-        });
+  <!-- CONTATTI -->
+  <section id="contatti" class="py-16 bg-gray-900 border-t border-gray-800">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-10">
+        <h2 class="text-3xl lg:text-4xl font-bold text-white">Contatti</h2>
+        <p class="text-gray-400 mt-2">Scrivici e ti rispondiamo velocemente.</p>
+      </div>
 
-        mobileMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                isMenuOpen = false;
-                mobileMenu.classList.add('hidden');
-                mobileMenuBtn.innerHTML = '<i class="fa-solid fa-bars text-2xl"></i>';
-            });
-        });
+      <div class="bg-gray-800 rounded-3xl p-8 border border-gray-700">
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div class="text-gray-300">
+            <div class="font-bold text-white">Email</div>
+            <div class="text-sm text-gray-400">weesrl.info@gmail.com</div>
+          </div>
+          <a href="mailto:weesrl.info@gmail.com" class="btn-blue px-8 py-4 rounded-full font-bold text-center w-full sm:w-auto">
+            Invia email
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        // ============================================
-        // NAVBAR SCROLL EFFECT
-        // ============================================
-        const navbar = document.getElementById('navbar');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 10) {
-                navbar.classList.add('shadow-lg');
-                navbar.style.background = 'rgba(17, 17, 17, 0.98)';
-            } else {
-                navbar.classList.remove('shadow-lg');
-                navbar.style.background = 'rgba(17, 17, 17, 0.95)';
-            }
-        });
+  <!-- FOOTER -->
+  <footer class="py-12 bg-brand-black border-t border-gray-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-4 gap-10">
+        <div>
+          <div class="flex items-center mb-6">
+            <div class="w-10 h-12 mr-3 flex items-center justify-center">
+              <img src="logo.png" alt="PLUGHUB" class="w-full h-full object-contain">
+            </div>
+            <span class="font-bold text-2xl tracking-tight"><span class="text-white">PLUG</span><span class="text-brand-blue">HUB</span></span>
+          </div>
+          <p class="text-gray-500 text-sm leading-relaxed">
+            Il servizio di power bank sharing. Ricarica ovunque, in qualsiasi momento.
+          </p>
+        </div>
 
-        // ============================================
-        // FAQ ACCORDION
-        // ============================================
-        function toggleFaq(button) {
-            const item = button.parentElement;
-            const isActive = item.classList.contains('active');
-            document.querySelectorAll('.faq-item').forEach(faq => {
-                faq.classList.remove('active');
-            });
-            if (!isActive) {
-                item.classList.add('active');
-            }
-        }
+        <div>
+          <h4 class="font-bold text-lg mb-4 text-white">Link</h4>
+          <ul class="space-y-2 text-gray-500 text-sm">
+            <li><a href="#mappa" class="hover:text-brand-blue">Mappa</a></li>
+            <li><a href="#prezzi" class="hover:text-brand-blue">Prezzi</a></li>
+            <li><a href="#per-locali" class="hover:text-brand-blue">Per i Locali</a></li>
+            <li><a href="#faq" class="hover:text-brand-blue">FAQ</a></li>
+          </ul>
+        </div>
 
-        // ============================================
-        // SMOOTH SCROLL
-        // ============================================
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        });
+        <div>
+          <h4 class="font-bold text-lg mb-4 text-white">Legale</h4>
+          <ul class="space-y-2 text-gray-500 text-sm">
+            <li><a href="privacy-policy.html" class="hover:text-brand-blue">Privacy Policy</a></li>
+            <li><a href="cookie-policy.html" class="hover:text-brand-blue">Cookie Policy</a></li>
+          </ul>
+        </div>
 
-        // ============================================
-        // GOOGLE MAPS DARK THEME STYLE
-        // ============================================
-        const mapDarkStyle = [
-            { "elementType": "geometry", "stylers": [{ "color": "#111111" }] },
-            { "elementType": "labels.icon", "stylers": [{ "visibility": "off" }] },
-            { "elementType": "labels.text.fill", "stylers": [{ "color": "#757575" }] },
-            { "elementType": "labels.text.stroke", "stylers": [{ "color": "#111111" }] },
-            { "featureType": "administrative", "elementType": "geometry", "stylers": [{ "color": "#757575" }] },
-            { "featureType": "administrative.country", "elementType": "labels.text.fill", "stylers": [{ "color": "#9e9e9e" }] },
-            { "featureType": "administrative.land_parcel", "stylers": [{ "visibility": "off" }] },
-            { "featureType": "administrative.locality", "elementType": "labels.text.fill", "stylers": [{ "color": "#bdbdbd" }] },
-            { "featureType": "poi", "elementType": "labels.text.fill", "stylers": [{ "color": "#757575" }] },
-            { "featureType": "poi.park", "elementType": "geometry", "stylers": [{ "color": "#181818" }] },
-            { "featureType": "poi.park", "elementType": "labels.text.fill", "stylers": [{ "color": "#616161" }] },
-            { "featureType": "road", "elementType": "geometry.fill", "stylers": [{ "color": "#2c2c2c" }] },
-            { "featureType": "road", "elementType": "labels.text.fill", "stylers": [{ "color": "#8a8a8a" }] },
-            { "featureType": "road.arterial", "elementType": "geometry", "stylers": [{ "color": "#373737" }] },
-            { "featureType": "road.highway", "elementType": "geometry", "stylers": [{ "color": "#3c3c3c" }] },
-            { "featureType": "road.highway.controlled_access", "elementType": "geometry", "stylers": [{ "color": "#4e4e4e" }] },
-            { "featureType": "road.local", "elementType": "labels.text.fill", "stylers": [{ "color": "#616161" }] },
-            { "featureType": "transit", "elementType": "labels.text.fill", "stylers": [{ "color": "#757575" }] },
-            { "featureType": "water", "elementType": "geometry", "stylers": [{ "color": "#0f0f0f" }] },
-            { "featureType": "water", "elementType": "labels.text.fill", "stylers": [{ "color": "#3d3d3d" }] }
-        ];
+        <div>
+          <h4 class="font-bold text-lg mb-4 text-white">Contatti</h4>
+          <ul class="space-y-2 text-gray-500 text-sm">
+            <li class="flex items-center gap-3">
+              <i class="fa-solid fa-envelope text-brand-blue text-xs"></i>
+              weesrl.info@gmail.com
+            </li>
+          </ul>
+        </div>
+      </div>
 
-        // ============================================
-        // GOOGLE MAPS VARIABLES
-        // ============================================
-        let map = null;
-        let markers = [];
-        let infoWindow = null;
+      <div class="border-t border-gray-900 mt-10 pt-8 text-gray-600 text-sm">
+        <p class="font-semibold text-gray-400">PLUGHUB è un brand di Wee S.R.L.S.</p>
+        <p class="mt-1">Tutti i diritti riservati © 2026</p>
+      </div>
+    </div>
+  </footer>
 
-        // ============================================
-        // CUSTOM MARKER SVG (Brand Color #41B3E7)
-        // ============================================
-        function createCustomMarker() {
-            return {
-                path: 'M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z',
-                fillColor: '#41B3E7',
-                fillOpacity: 1,
-                strokeColor: '#FFFFFF',
-                strokeWeight: 2,
-                scale: 1.5,
-                anchor: new google.maps.Point(12, 24)
-            };
-        }
-
-        // ============================================
-        // CREATE INFO WINDOW CONTENT
-        // ============================================
-        function createInfoWindowContent(locale) {
-            const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(locale.nome)}&destination_place_id=${locale.place_id}`;
-            
-            return `
-                <div style="font-family: 'Montserrat', sans-serif; max-width: 280px; color: #fff;">
-                    <h3 style="margin: 0 0 8px 0; font-size: 16px; font-weight: 700; color: #41B3E7;">${locale.nome}</h3>
-                    <p style="margin: 0 0 12px 0; font-size: 13px; color: #bbb; line-height: 1.4;">${locale.indirizzo}</p>
-                    <a href="${directionsUrl}" target="_blank" style="
-                        display: inline-flex;
-                        align-items: center;
-                        gap: 6px;
-                        background: linear-gradient(135deg, #41B3E7 0%, #6BC9F0 100%);
-                        color: #111;
-                        text-decoration: none;
-                        padding: 10px 16px;
-                        border-radius: 20px;
-                        font-size: 13px;
-                        font-weight: 600;
-                        transition: all 0.3s ease;
-                    ">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0121 18.382V7.618a1 1 0 01-.447-.894L15 7m0 13V7"/>
-                        </svg>
-                        Ottieni Indicazioni
-                    </a>
-                </div>
-            `;
-        }
-
-        // ============================================
-        // INITIALIZE MAP WITH MARKERS
-        // ============================================
-        async function initMap() {
-            try {
-                // Fetch locali data
-                const response = await fetch('locali.json');
-                const locali = await response.json();
-
-                // Create map centered on first location or default (Milano)
-                const center = locali.length > 0 
-                    ? { lat: locali[0].lat, lng: locali[0].lng }
-                    : { lat: 45.4642, lng: 9.1900 };
-
-                map = new google.maps.Map(document.getElementById('map-canvas'), {
-                    center: center,
-                    zoom: 13,
-                    styles: mapDarkStyle,
-                    mapTypeControl: false,
-                    streetViewControl: false,
-                    fullscreenControl: false,
-                    zoomControl: false,
-                    gestureHandling: 'cooperative'
-                });
-
-                // Create InfoWindow
-                infoWindow = new google.maps.InfoWindow({
-                    maxWidth: 300,
-                    backgroundColor: '#1E1E1E'
-                });
-
-                // Add markers for each locale
-                locali.forEach((locale, index) => {
-                    const marker = new google.maps.Marker({
-                        position: { lat: locale.lat, lng: locale.lng },
-                        map: map,
-                        title: locale.nome,
-                        icon: createCustomMarker(),
-                        animation: google.maps.Animation.DROP,
-                        delay: index * 100
-                    });
-
-                    // Click event for marker
-                    marker.addListener('click', () => {
-                        infoWindow.setContent(createInfoWindowContent(locale));
-                        infoWindow.open(map, marker);
-                    });
-
-                    markers.push(marker);
-                });
-
-                // Hide overlay when map is loaded
-                document.getElementById('map-overlay').classList.add('hidden');
-
-            } catch (error) {
-                console.error('Error loading map data:', error);
-            }
-        }
-
-        // ============================================
-        // MAP CONTROL FUNCTIONS
-        // ============================================
-        function mapZoomIn() {
-            if (map) map.setZoom(map.getZoom() + 1);
-        }
-
-        function mapZoomOut() {
-            if (map) map.setZoom(map.getZoom() - 1);
-        }
-
-        function mapRecenter() {
-            if (map && markers.length > 0) {
-                const bounds = new google.maps.LatLngBounds();
-                markers.forEach(marker => bounds.extend(marker.getPosition()));
-                map.fitBounds(bounds);
-            }
-        }
-
-        // ============================================
-        // LOAD GOOGLE MAPS API SCRIPT
-        // ============================================
-        function loadGoogleMapsScript() {
-            if (window.google && window.google.maps) {
-                // API already loaded
-                initMap();
-                return;
-            }
-
-            const script = document.createElement('script');
-            script.src = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}&callback=initMap&libraries=marker`;
-            script.async = true;
-            script.defer = true;
-            script.onerror = () => {
-                console.error('Failed to load Google Maps API');
-            };
-            document.head.appendChild(script);
-        }
-
-        // ============================================
-        // COOKIE BANNER LOGIC
-        // ============================================
-        const cookieBanner = document.getElementById('cookie-banner');
-        const mapOverlay = document.getElementById('map-overlay');
-        const COOKIE_CONSENT_KEY = 'plugHubCookieConsent';
-
-        // Check cookie consent on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            const consent = localStorage.getItem(COOKIE_CONSENT_KEY);
-            if (consent === 'accepted') {
-                hideCookieBanner();
-                loadGoogleMapsScript();
-            } else {
-                // No consent - show banner and block map
-                showCookieBanner();
-            }
-        });
-
-        function showCookieBanner() {
-            cookieBanner.classList.remove('hidden');
-        }
-
-        function hideCookieBanner() {
-            cookieBanner.classList.add('hidden');
-        }
-
-        function acceptCookies() {
-            localStorage.setItem(COOKIE_CONSENT_KEY, 'accepted');
-            hideCookieBanner();
-            loadGoogleMapsScript();
-        }
-
-        function rejectCookies() {
-            localStorage.setItem(COOKIE_CONSENT_KEY, 'rejected');
-            hideCookieBanner();
-            // Map stays blocked
-        }
-
-        function closeCookieBanner() {
-            hideCookieBanner();
-            // If no choice made, treat as rejected
-            if (!localStorage.getItem(COOKIE_CONSENT_KEY)) {
-                localStorage.setItem(COOKIE_CONSENT_KEY, 'rejected');
-            }
-        }
-    </script>
 </body>
 </html>
