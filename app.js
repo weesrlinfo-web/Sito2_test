@@ -466,7 +466,7 @@ const mapDarkStyle = [
 
 function enableMap() {
   // Se manca la key, evita errori e lascia overlay
-  if (!CONFIG.GOOGLE_MAPS_API_KEY || CONFIG.GOOGLE_MAPS_API_KEY === 'AIzaSyBL_ZBWZYp4-RGuuB5l_tNB7dEO9EXIqZg') {
+  if (!CONFIG.GOOGLE_MAPS_API_KEY || CONFIG.GOOGLE_MAPS_API_KEY === 'INSERISCI_LA_TUA_API_KEY') {
     console.warn('Inserisci la tua GOOGLE_MAPS_API_KEY in app.js');
     return;
   }
