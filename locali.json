@@ -1,0 +1,42 @@
+[
+  {
+    "id": "01",
+    "nome": "Bar Centrale",
+    "lat": 45.4642,
+    "lng": 9.1900,
+    "indirizzo": "Via Roma 15, Milano",
+    "place_id": "ChIJN1t_tDeuEmsRUsoyG83frY4"
+  },
+  {
+    "id": "02",
+    "nome": "Caffè degli Artisti",
+    "lat": 45.4720,
+    "lng": 9.1850,
+    "indirizzo": "Corso Como 10, Milano",
+    "place_id": "ChIJX2xx1CauEmsR1hERd3vPFoU"
+  },
+  {
+    "id": "03",
+    "nome": "Ristorante La Piazza",
+    "lat": 45.4580,
+    "lng": 9.1950,
+    "indirizzo": "Piazza Duomo 1, Milano",
+    "place_id": "ChIJcS7P_8KxEmsR7Yy0f1e1f1E"
+  },
+  {
+    "id": "04",
+    "nome": "Pub The Irish",
+    "lat": 45.4680,
+    "lng": 9.1800,
+    "indirizzo": "Via Torino 45, Milano",
+    "place_id": "ChIJd8BlQ1CvEmsRMxOTf1xF1xF"
+  },
+  {
+    "id": "05",
+    "nome": "Hotel Milano Central",
+    "lat": 45.4850,
+    "lng": 9.2050,
+    "indirizzo": "Via Stazione 1, Milano",
+    "place_id": "ChIJe8BlQ1CvEmsRMxOTf1xF1xG"
+  }
+]
