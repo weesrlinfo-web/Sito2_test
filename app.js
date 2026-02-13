@@ -13,7 +13,7 @@
 const CONFIG = {
   // ⚠️ Inserisci qui la tua API KEY Google Maps (Maps JavaScript API).
   // Ricorda di proteggerla con restrizioni HTTP referrer nel Google Cloud Console.
-  GOOGLE_MAPS_API_KEY: 'AIzaSyA9JYajFqRA8BSVOLtJAzKIkMtlZ3cJBuI',
+  GOOGLE_MAPS_API_KEY: 'AIzaSyBL_ZBWZYp4-RGuuB5l_tNB7dEO9EXIqZg',
 
   // Centro di default (Italia)
   DEFAULT_CENTER: { lat: 41.9028, lng: 12.4964 }, // Roma
