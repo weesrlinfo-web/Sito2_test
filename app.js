@@ -24,6 +24,8 @@ const CONFIG = {
 
   // Dati
   DATA_URL: 'locali.json',
+
+  GOOGLE_MAPS_MAP_ID: 'DEMO_MAP_ID',
 };
 
 /** =========================
@@ -503,6 +505,7 @@ window.initMap = function initMap() {
     streetViewControl: false,
     fullscreenControl: false,
     zoomControl: false,
+    mapId: CONFIG.GOOGLE_MAPS_MAP_ID, 
     gestureHandling: 'cooperative',
   });
 
