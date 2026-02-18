@@ -34,11 +34,35 @@
    let stations = [];
    let map = null;
    let markersById = new Map();
-   let placesService = null;
-   
    let selectedStationId = null;
    let userLatLng = null;
    
+
+
+// Cache statico generato da GitHub Actions (nessuna chiamata a Google dal browser)
+let placesCache = null;
+let placesCacheLoading = null;
+
+async function loadPlacesCache() {
+  if (placesCache) return placesCache;
+  if (placesCacheLoading) return placesCacheLoading;
+
+  placesCacheLoading = (async () => {
+    try {
+      const res = await fetch(`places_cache.json?cb=${Date.now()}`, { cache: 'no-store' });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+      placesCache = data || {};
+    } catch (e) {
+      console.warn('Places cache non disponibile:', e?.message || e);
+      placesCache = {};
+    }
+    return placesCache;
+  })();
+
+  return placesCacheLoading;
+}
+
    /** =========================
     *  DOM
     *  ========================= */
@@ -379,38 +403,27 @@
        map.panTo(pos);
        if (map.getZoom() < 13) map.setZoom(13);
      }
-   
-     // Try Places Details for photo/hours/address if place_id present and map enabled
-     if (placesService && station.place_id) {
-       placesService.getDetails(
-         {
-           placeId: station.place_id,
-           fields: ['name', 'formatted_address', 'opening_hours', 'photos'],
-         },
-         (place, status) => {
-           if (status !== google.maps.places.PlacesServiceStatus.OK || !place) return;
-   
-           // Update info if missing/placeholder
-           if (place.name && (!station.nome || station.nome === 'Stazione')) {
-             el.cardTitle.textContent = place.name;
-           }
-           if (place.formatted_address && !station.indirizzo) {
-             el.cardAddress.textContent = place.formatted_address;
-           }
-   
-           // Opening hours: show "Aperto ora" if possible
-           if (place.opening_hours && typeof place.opening_hours.isOpen === 'function') {
-             const isOpen = place.opening_hours.isOpen();
-             el.cardHoursRow.classList.remove('hidden');
-             el.cardHours.textContent = isOpen ? 'Aperto ora' : 'Chiuso ora';
-           }
-   
-           // Photo
-           if (place.photos && place.photos.length) {
-             const url = place.photos[0].getUrl({ maxWidth: 900, maxHeight: 600 });
-             el.cardPhoto.src = url;
-           }
-         }
+
+// Foto + orari: letti dal cache statico (generato server-side da GitHub Actions)
+if (station.place_id) {
+  loadPlacesCache().then((cache) => {
+    const p = cache?.[station.place_id];
+    if (!p) return;
+
+    if (p.name) el.cardTitle.textContent = p.name;
+    if (p.address) el.cardAddress.textContent = p.address;
+
+    if (Array.isArray(p.weekdayDescriptions) && p.weekdayDescriptions.length) {
+      el.cardHoursRow.classList.remove('hidden');
+      // Mostriamo la prima riga (es. "lunedì: 09:00–18:00") per non riempire la card
+      el.cardHours.textContent = p.weekdayDescriptions[0];
+    }
+
+    if (p.photoPath) {
+      el.cardPhoto.src = p.photoPath;
+    }
+  });
+}
        );
      }
    }
@@ -485,7 +498,7 @@
      // - marker: AdvancedMarkerElement
      // - places: per foto/orari (facoltativo ma utile per la card)
      // - geometry: per distanze (facoltativo)
-     script.src = `https://maps.googleapis.com/maps/api/js?key=${CONFIG.GOOGLE_MAPS_API_KEY}&callback=initMap&libraries=marker,places,geometry`;
+     script.src = `https://maps.googleapis.com/maps/api/js?key=${CONFIG.GOOGLE_MAPS_API_KEY}&callback=initMap&v=weekly&libraries=marker`;
      script.async = true;
      script.defer = true;
      script.onerror = () => console.error('Errore nel caricamento Google Maps API');
@@ -508,10 +521,6 @@
        mapId: CONFIG.GOOGLE_MAPS_MAP_ID, 
        gestureHandling: 'cooperative',
      });
-   
-     // Places service (per dettagli)
-     placesService = new google.maps.places.PlacesService(map);
-   
      // Marker pin
      const pin = new google.maps.marker.PinElement({
        background: '#41B3E7',
