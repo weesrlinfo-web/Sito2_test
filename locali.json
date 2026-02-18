@@ -10,7 +10,7 @@
     "pagamento": "Carta, App",
     "powerbank_disponibili": 6,
     "photoUrl": "",
-    "place_id": "ChIJtSDfulHafkcRXqCEUnZKrN0"
+    "place_id": ""
   },
   {
     "id": "venezia-bacaro",
@@ -23,7 +23,7 @@
     "pagamento": "Carta, App",
     "powerbank_disponibili": 4,
     "photoUrl": "",
-    "place_id": "ChIJLR-53J2xfkcR20jNfKNaM5Q"
+    "place_id": ""
   },
   {
     "id": "milano-duomo",
@@ -36,6 +36,6 @@
     "pagamento": "Carta, App",
     "powerbank_disponibili": 8,
     "photoUrl": "",
-    "place_id": "ChIJA6cVWq7GhkcRdupqh7Qw3Yg"
+    "place_id": ""
   }
 ]
