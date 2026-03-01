@@ -1,20 +1,7 @@
 [
   {
-    "id": "padova-otivm",
-    "nome": "Otivm Padova",
-    "lat": 45.4069,
-    "lng": 11.8768,
-    "indirizzo": "Via Roma, 69, 35122 Padova PD, Italia",
-    "orari": "09:00 – 02:00",
-    "tariffa": "1€ / 30 min",
-    "pagamento": "Carta, App",
-    "powerbank_disponibili": 6,
-    "photoUrl": "",
-    "place_id": ""
-  },
-  {
     "id": "venezia-bacaro",
-    "nome": "Bacaro (Esempio Venezia)",
+    "nome": "Esempio Venezia",
     "lat": 45.438,
     "lng": 12.3358,
     "indirizzo": "Campo San Polo, Venezia VE, Italia",
@@ -27,7 +14,7 @@
   },
   {
     "id": "milano-duomo",
-    "nome": "Caffè Duomo (Esempio Milano)",
+    "nome": "Esempio Milano",
     "lat": 45.4642,
     "lng": 9.19,
     "indirizzo": "Piazza del Duomo, Milano MI, Italia",
