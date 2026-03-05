@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PLUGHUB | Power Bank Sharing Italia</title>
-  <meta name="description" content="PLUGHUB - Power bank sharing in Italia. Trova una stazione vicino a te e ottieni indicazioni in un tap." />
+  <title data-i18n="meta.title">PLUGHUB | Power Bank Sharing Italia</title>
+  <meta name="description" content="PLUGHUB - Power bank sharing in Italia. Trova una stazione vicino a te e ottieni indicazioni in un tap." data-i18n="meta.description" data-i18n-attr="content" />
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -52,12 +52,12 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col lg:flex-row items-center justify-between gap-4">
         <div class="text-sm text-gray-300 text-center lg:text-left">
-          <p><strong class="text-white">Informativa breve:</strong> questo sito usa cookie tecnici e servizi di terze parti (Google Maps) per mostrarti la mappa. Accettando, consenti l'uso di Google Maps. Rifiutando, vedrai comunque la lista delle stazioni, ma la mappa resterà disattivata.</p>
+          <p><strong class="text-white" data-i18n="cookie.title">Informativa breve:</strong> <span data-i18n="cookie.message">questo sito usa cookie tecnici e servizi di terze parti (Google Maps) per mostrarti la mappa. Accettando, consenti l'uso di Google Maps. Rifiutando, vedrai comunque la lista delle stazioni, ma la mappa resterà disattivata.</span></p>
         </div>
         <div class="flex flex-wrap items-center justify-center gap-3">
-          <button id="btn-accept-cookies" class="btn-blue px-6 py-2 rounded-full font-semibold text-sm">Accetta</button>
-          <button id="btn-reject-cookies" class="btn-gray px-6 py-2 rounded-full font-semibold text-sm">Rifiuta</button>
-          <a href="cookie-policy.html" class="text-brand-blue hover:underline text-sm font-semibold">Cookie Policy</a>
+          <button id="btn-accept-cookies" class="btn-blue px-6 py-2 rounded-full font-semibold text-sm" data-i18n="cookie.accept">Accetta</button>
+          <button id="btn-reject-cookies" class="btn-gray px-6 py-2 rounded-full font-semibold text-sm" data-i18n="cookie.reject">Rifiuta</button>
+          <a href="cookie-policy.html" class="text-brand-blue hover:underline text-sm font-semibold" data-i18n="cookie.policy">Cookie Policy</a>
           <button id="btn-close-cookie" class="text-gray-400 hover:text-white ml-2" aria-label="Chiudi">
             <i class="fa-solid fa-xmark text-xl"></i>
           </button>
@@ -70,27 +70,66 @@
   <nav id="navbar" class="fixed top-0 left-0 right-0 bg-brand-black/95 backdrop-blur-md z-50 border-b border-gray-800 transition-all duration-300">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center h-20">
-        <a class="flex items-center" href="#top" aria-label="PLUGHUB">
-          <div class="w-14 h-14 mr-3 flex items-center justify-center">
+        <!-- Logo -->
+        <a class="flex items-center flex-shrink-0" href="#top" aria-label="PLUGHUB">
+          <div class="w-10 h-10 sm:w-12 sm:h-12 mr-2 flex items-center justify-center">
             <img src="logo.png" alt="PLUGHUB Logo" class="w-full h-full object-contain">
           </div>
-          <span class="font-bold text-2xl tracking-tight"><span class="text-white">PLUG</span><span class="text-brand-blue">HUB</span></span>
+          <span class="font-bold text-lg sm:text-xl tracking-tight"><span class="text-white">PLUG</span><span class="text-brand-blue">HUB</span></span>
         </a>
 
-        <div class="hidden lg:flex items-center space-x-8">
-          <a href="#mappa" class="font-semibold text-sm text-gray-300 hover:text-brand-blue transition-colors">Mappa</a>
-          <a href="#prezzi" class="font-semibold text-sm text-gray-300 hover:text-brand-blue transition-colors">Prezzi</a>
-          <a href="#per-locali" class="font-semibold text-sm text-gray-300 hover:text-brand-blue transition-colors">Per i Locali</a>
-          <a href="#faq" class="font-semibold text-sm text-gray-300 hover:text-brand-blue transition-colors">FAQ</a>
-          <a href="#contatti" class="font-semibold text-sm text-gray-300 hover:text-brand-blue transition-colors">Contatti</a>
+        <!-- Center Navigation (hidden on mobile, visible on desktop) -->
+        <div class="hidden lg:flex items-center space-x-4 xl:space-x-6">
+          <a href="#mappa" class="font-semibold text-sm text-gray-300 hover:text-brand-blue transition-colors" data-i18n="nav.map">Mappa</a>
+          <a href="#prezzi" class="font-semibold text-sm text-gray-300 hover:text-brand-blue transition-colors" data-i18n="nav.prices">Prezzi</a>
+          <a href="#per-locali" class="font-semibold text-sm text-gray-300 hover:text-brand-blue transition-colors" data-i18n="nav.venues">Per i Locali</a>
+          <a href="#faq" class="font-semibold text-sm text-gray-300 hover:text-brand-blue transition-colors" data-i18n="nav.faq">FAQ</a>
+          <a href="#contatti" class="font-semibold text-sm text-gray-300 hover:text-brand-blue transition-colors" data-i18n="nav.contact">Contatti</a>
         </div>
 
-        <div class="hidden lg:block">
-          <a href="#per-locali" class="btn-blue px-6 py-3 rounded-full font-semibold text-sm shadow-md">Diventa Partner</a>
-        </div>
-
-        <div class="lg:hidden flex items-center">
-          <button id="mobile-menu-btn" class="text-white hover:text-brand-blue focus:outline-none p-2">
+        <!-- Right Side: Language Selector + Partner Button (ALWAYS visible) -->
+        <div class="flex items-center gap-2">
+          <!-- Language Selector -->
+          <div class="language-selector relative">
+            <button id="lang-toggle" class="lang-btn flex items-center gap-1.5 px-2.5 sm:px-3 py-2 rounded-full font-semibold text-sm">
+              <i class="fa-solid fa-globe text-sm"></i>
+              <span id="current-lang">IT</span>
+              <i class="fa-solid fa-chevron-down text-xs hidden sm:inline"></i>
+            </button>
+            <div id="lang-dropdown" class="lang-dropdown hidden">
+              <button class="lang-option" data-lang="it">
+                <span class="lang-flag">🇮🇹</span>
+                <span class="lang-name">Italiano</span>
+                <span class="lang-code">IT</span>
+              </button>
+              <button class="lang-option" data-lang="en">
+                <span class="lang-flag">🇬🇧</span>
+                <span class="lang-name">English</span>
+                <span class="lang-code">EN</span>
+              </button>
+              <button class="lang-option" data-lang="es">
+                <span class="lang-flag">🇪🇸</span>
+                <span class="lang-name">Español</span>
+                <span class="lang-code">ES</span>
+              </button>
+              <button class="lang-option" data-lang="zh">
+                <span class="lang-flag">🇨🇳</span>
+                <span class="lang-name">中文</span>
+                <span class="lang-code">ZH</span>
+              </button>
+              <button class="lang-option" data-lang="ja">
+                <span class="lang-flag">🇯🇵</span>
+                <span class="lang-name">日本語</span>
+                <span class="lang-code">JA</span>
+              </button>
+            </div>
+          </div>
+          
+          <!-- Partner Button (hidden on small mobile, visible on larger screens) -->
+          <a href="#per-locali" class="hidden sm:block btn-blue px-3 sm:px-4 py-2 rounded-full font-semibold text-sm shadow-md whitespace-nowrap" data-i18n="nav.partner">Diventa Partner</a>
+          
+          <!-- Hamburger Menu (visible on mobile/tablet only) -->
+          <button id="mobile-menu-btn" class="lg:hidden text-white hover:text-brand-blue focus:outline-none p-2">
             <i class="fa-solid fa-bars text-2xl"></i>
           </button>
         </div>
@@ -99,13 +138,13 @@
 
     <div id="mobile-menu" class="hidden lg:hidden bg-brand-black border-t border-gray-800 absolute w-full shadow-xl">
       <div class="px-4 pt-2 pb-8 space-y-2">
-        <a href="#mappa" class="block px-4 py-3 text-base font-semibold text-gray-300 hover:text-brand-blue hover:bg-gray-900 rounded-lg transition-colors">Mappa</a>
-        <a href="#prezzi" class="block px-4 py-3 text-base font-semibold text-gray-300 hover:text-brand-blue hover:bg-gray-900 rounded-lg transition-colors">Prezzi</a>
-        <a href="#per-locali" class="block px-4 py-3 text-base font-semibold text-gray-300 hover:text-brand-blue hover:bg-gray-900 rounded-lg transition-colors">Per i Locali</a>
-        <a href="#faq" class="block px-4 py-3 text-base font-semibold text-gray-300 hover:text-brand-blue hover:bg-gray-900 rounded-lg transition-colors">FAQ</a>
-        <a href="#contatti" class="block px-4 py-3 text-base font-semibold text-gray-300 hover:text-brand-blue hover:bg-gray-900 rounded-lg transition-colors">Contatti</a>
+        <a href="#mappa" class="block px-4 py-3 text-base font-semibold text-gray-300 hover:text-brand-blue hover:bg-gray-900 rounded-lg transition-colors" data-i18n="nav.map">Mappa</a>
+        <a href="#prezzi" class="block px-4 py-3 text-base font-semibold text-gray-300 hover:text-brand-blue hover:bg-gray-900 rounded-lg transition-colors" data-i18n="nav.prices">Prezzi</a>
+        <a href="#per-locali" class="block px-4 py-3 text-base font-semibold text-gray-300 hover:text-brand-blue hover:bg-gray-900 rounded-lg transition-colors" data-i18n="nav.venues">Per i Locali</a>
+        <a href="#faq" class="block px-4 py-3 text-base font-semibold text-gray-300 hover:text-brand-blue hover:bg-gray-900 rounded-lg transition-colors" data-i18n="nav.faq">FAQ</a>
+        <a href="#contatti" class="block px-4 py-3 text-base font-semibold text-gray-300 hover:text-brand-blue hover:bg-gray-900 rounded-lg transition-colors" data-i18n="nav.contact">Contatti</a>
         <div class="pt-4 px-4">
-          <a href="#per-locali" class="block w-full btn-blue text-center px-6 py-4 rounded-full font-bold text-base">Diventa Partner</a>
+          <a href="#per-locali" class="block w-full btn-blue text-center px-6 py-4 rounded-full font-bold text-base" data-i18n="nav.partner">Diventa Partner</a>
         </div>
       </div>
     </div>
@@ -121,31 +160,31 @@
         <div>
           <div class="inline-flex items-center gap-2 px-4 py-2 bg-brand-blue/15 text-brand-blue rounded-full text-sm font-bold mb-6 border border-brand-blue/30">
             <i class="fa-solid fa-bolt"></i>
-            Power bank sharing
+            <span data-i18n="hero.badge">Power bank sharing</span>
           </div>
-          <h1 class="text-4xl lg:text-6xl font-extrabold leading-tight">
+          <h1 class="text-4xl lg:text-6xl font-extrabold leading-tight" data-i18n="hero.title">
             Non restare mai senza <span class="text-brand-blue">batteria</span>.
           </h1>
-          <p class="mt-6 text-lg text-gray-300 max-w-xl">
+          <p class="mt-6 text-lg text-gray-300 max-w-xl" data-i18n="hero.subtitle">
             Trova una stazione vicino a te, ritira un powerbank e continua la giornata. Restituiscilo in qualsiasi stazione.
           </p>
           <div class="mt-8 flex flex-col sm:flex-row gap-3">
-            <a href="#mappa" class="btn-blue px-8 py-4 rounded-full font-bold text-center">Trova una stazione</a>
-            <a href="#per-locali" class="btn-white-outline px-8 py-4 rounded-full font-bold text-center">Diventa partner</a>
+            <a href="#mappa" class="btn-blue px-8 py-4 rounded-full font-bold text-center" data-i18n="hero.cta.find">Trova una stazione</a>
+            <a href="#per-locali" class="btn-white-outline px-8 py-4 rounded-full font-bold text-center" data-i18n="hero.cta.partner">Diventa partner</a>
           </div>
 
           <div class="mt-10 grid grid-cols-3 gap-4 max-w-md">
             <div class="bg-gray-900/60 border border-gray-800 rounded-2xl p-4 text-center">
               <div class="text-2xl font-extrabold text-white">1€</div>
-              <div class="text-xs text-gray-400 mt-1">ogni 30 min</div>
+              <div class="text-xs text-gray-400 mt-1" data-i18n="hero.stats.price">ogni 30 min</div>
             </div>
             <div class="bg-gray-900/60 border border-gray-800 rounded-2xl p-4 text-center">
               <div class="text-2xl font-extrabold text-white">0</div>
-              <div class="text-xs text-gray-400 mt-1">gestione staff</div>
+              <div class="text-xs text-gray-400 mt-1" data-i18n="hero.stats.staff">gestione staff</div>
             </div>
             <div class="bg-gray-900/60 border border-gray-800 rounded-2xl p-4 text-center">
               <div id="station-count-hero" class="text-2xl font-extrabold text-white">—</div>
-              <div class="text-xs text-gray-400 mt-1">stazioni</div>
+              <div class="text-xs text-gray-400 mt-1" data-i18n="hero.stats.stations">stazioni</div>
             </div>
           </div>
         </div>
@@ -157,11 +196,11 @@
                 <i class="fa-solid fa-map-location-dot"></i>
               </div>
               <div>
-                <div class="text-xl font-bold">Mappa + Lista</div>
-                <div class="text-gray-400 text-sm">Seleziona un bar e apri le indicazioni.</div>
+                <div class="text-xl font-bold" data-i18n="hero.card.title">Mappa + Lista</div>
+                <div class="text-gray-400 text-sm" data-i18n="hero.card.subtitle">Seleziona un bar e apri le indicazioni.</div>
               </div>
             </div>
-            <div class="mt-8 text-gray-300 text-sm leading-relaxed">
+            <div class="mt-8 text-gray-300 text-sm leading-relaxed" data-i18n="hero.card.description">
               Ora puoi vedere tutte le stazioni nella mappa e, a sinistra, la lista completa dei locali.
               Tocca un locale per vedere i dettagli e ottenere le indicazioni su Google Maps.
             </div>
@@ -176,14 +215,14 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-6 mb-6">
         <div>
-          <h2 class="text-3xl lg:text-4xl font-bold text-white">Stazioni PLUGHUB</h2>
-          <p class="text-gray-400 mt-2 max-w-2xl">
+          <h2 class="text-3xl lg:text-4xl font-bold text-white" data-i18n="map.title">Stazioni PLUGHUB</h2>
+          <p class="text-gray-400 mt-2 max-w-2xl" data-i18n="map.subtitle">
             Lista a sinistra, mappa a destra. Clicca un locale per vedere i dettagli e aprire le indicazioni.
           </p>
         </div>
         <div class="flex items-center gap-3">
           <button id="btn-fit-all" class="btn-gray px-5 py-3 rounded-full font-bold text-sm">
-            <i class="fa-solid fa-expand mr-2"></i>Mostra tutte
+            <i class="fa-solid fa-expand mr-2"></i><span data-i18n="map.showAll">Mostra tutte</span>
           </button>
         </div>
       </div>
@@ -194,10 +233,10 @@
         <aside class="station-sidebar bg-gray-900/95 border-b lg:border-b-0 lg:border-r border-gray-800">
           <div class="p-4 border-b border-gray-800">
             <div class="flex items-center justify-between">
-              <div class="font-bold text-white">Locali</div>
-              <div class="text-xs text-gray-400"><span id="station-count">—</span> totali</div>
+              <div class="font-bold text-white" data-i18n="map.list.title">Locali</div>
+              <div class="text-xs text-gray-400"><span id="station-count">—</span> <span data-i18n="map.list.total">totali</span></div>
             </div>
-            <div class="mt-2 text-xs text-gray-500">
+            <div class="mt-2 text-xs text-gray-500" data-i18n="map.list.hint">
               Suggerimento: consenti la posizione per vedere le distanze.
             </div>
           </div>
@@ -214,15 +253,15 @@
             <div class="w-20 h-20 bg-gray-800 rounded-full flex items-center justify-center mb-6 border border-gray-700">
               <i class="fa-solid fa-map-location-dot text-brand-blue text-3xl"></i>
             </div>
-            <h3 class="text-2xl font-bold text-white mb-3 text-center">Mappa disattivata</h3>
-            <p class="text-gray-400 text-center max-w-md mb-6 px-4">
+            <h3 class="text-2xl font-bold text-white mb-3 text-center" data-i18n="map.overlay.title">Mappa disattivata</h3>
+            <p class="text-gray-400 text-center max-w-md mb-6 px-4" data-i18n="map.overlay.message">
               Per visualizzare la mappa interattiva, accetta i cookie di terze parti (Google Maps).
               La lista dei locali resta sempre disponibile.
             </p>
-            <button id="btn-accept-overlay" class="btn-blue px-8 py-3 rounded-full font-bold">
+            <button id="btn-accept-overlay" class="btn-blue px-8 py-3 rounded-full font-bold" data-i18n="map.overlay.cta">
               Accetta e visualizza la mappa
             </button>
-            <a href="cookie-policy.html" class="text-brand-blue hover:underline text-sm mt-4">
+            <a href="cookie-policy.html" class="text-brand-blue hover:underline text-sm mt-4" data-i18n="map.overlay.policy">
               Leggi la Cookie Policy
             </a>
           </div>
@@ -268,18 +307,18 @@
                 </div>
 
                 <div id="card-payments-row" class="text-gray-500">
-                  Pagamento: <span id="card-payments" class="text-gray-700">Carta, App</span>
+                  <span data-i18n="map.card.payment">Pagamento:</span> <span id="card-payments" class="text-gray-700">Carta, App</span>
                 </div>
 
                 <div id="card-availability" class="mt-2 font-semibold text-[#1d4ed8]">
                   <i class="fa-solid fa-bolt"></i>
-                  <span id="card-available">—</span> powerbank disponibili
+                  <span id="card-available">—</span> <span data-i18n="map.card.available">powerbank disponibili</span>
                 </div>
               </div>
 
               <a id="card-directions" target="_blank" class="card-directions">
                 <i class="fa-solid fa-location-arrow"></i>
-                Indicazioni
+                <span data-i18n="map.card.directions">Indicazioni</span>
               </a>
             </div>
           </div>
@@ -292,37 +331,37 @@
   <section id="prezzi" class="py-16 bg-brand-black border-t border-gray-900">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center max-w-3xl mx-auto mb-12">
-        <h2 class="text-3xl lg:text-4xl font-bold text-white mb-4">Tariffe trasparenti</h2>
-        <p class="text-lg text-gray-400">Paga solo per il tempo che utilizzi. Niente abbonamenti, niente sorprese.</p>
+        <h2 class="text-3xl lg:text-4xl font-bold text-white mb-4" data-i18n="prices.title">Tariffe trasparenti</h2>
+        <p class="text-lg text-gray-400" data-i18n="prices.subtitle">Paga solo per il tempo che utilizzi. Niente abbonamenti, niente sorprese.</p>
       </div>
 
       <div class="bg-gray-900 rounded-3xl p-8 lg:p-12 border border-gray-800 relative overflow-hidden">
-        <div class="absolute top-0 right-0 bg-brand-blue text-white text-xs font-bold px-4 py-2 rounded-bl-2xl">PAGA E USA</div>
+        <div class="absolute top-0 right-0 bg-brand-blue text-white text-xs font-bold px-4 py-2 rounded-bl-2xl" data-i18n="prices.badge">PAGA E USA</div>
         <div class="grid md:grid-cols-2 gap-8 items-center">
           <div>
-            <h3 class="text-2xl font-bold mb-4 text-white">Tariffa</h3>
+            <h3 class="text-2xl font-bold mb-4 text-white" data-i18n="prices.rate.title">Tariffa</h3>
             <ul class="space-y-3 text-gray-400">
               <li class="flex items-center gap-3">
                 <i class="fa-solid fa-check text-brand-blue"></i>
-                <span><strong class="text-white">1€</strong> ogni 30 minuti</span>
+                <span data-i18n="prices.rate.item1"><strong class="text-white">1€</strong> ogni 30 minuti</span>
               </li>
               <li class="flex items-center gap-3">
                 <i class="fa-solid fa-check text-brand-blue"></i>
-                <span>Pagamento al momento del prelievo</span>
+                <span data-i18n="prices.rate.item2">Pagamento al momento del prelievo</span>
               </li>
               <li class="flex items-center gap-3">
                 <i class="fa-solid fa-check text-brand-blue"></i>
-                <span>Restituisci in qualunque stazione</span>
+                <span data-i18n="prices.rate.item3">Restituisci in qualunque stazione</span>
               </li>
             </ul>
           </div>
 
           <div class="bg-gray-800 rounded-2xl p-8 text-center shadow-xl border border-gray-700">
-            <div class="text-sm text-gray-400 mb-2">Tariffa</div>
+            <div class="text-sm text-gray-400 mb-2" data-i18n="prices.card.label">Tariffa</div>
             <div class="text-6xl font-bold text-white mb-2">1<span class="text-3xl">€</span></div>
-            <div class="text-gray-400 mb-6">Ogni 30 minuti</div>
+            <div class="text-gray-400 mb-6" data-i18n="prices.card.period">Ogni 30 minuti</div>
             <div class="border-t border-gray-700 pt-4">
-              <div class="text-sm text-gray-400">Semplice e trasparente</div>
+              <div class="text-sm text-gray-400" data-i18n="prices.card.simple">Semplice e trasparente</div>
               <div class="text-2xl font-bold text-brand-blue">1€ <span class="text-sm font-normal text-gray-400">/ 30min</span></div>
             </div>
           </div>
@@ -330,7 +369,7 @@
       </div>
 
       <div class="mt-10 text-center">
-        <p class="text-sm font-semibold text-gray-400 mb-4">Pagamento sicuro tramite POS contactless</p>
+        <p class="text-sm font-semibold text-gray-400 mb-4" data-i18n="prices.secure">Pagamento sicuro tramite POS contactless</p>
         <div class="inline-flex flex-wrap items-center justify-center gap-6 bg-gray-900 px-8 py-4 rounded-2xl border border-gray-800">
           <i class="fa-brands fa-cc-apple-pay text-4xl text-white"></i>
           <i class="fa-brands fa-google-pay text-4xl text-white"></i>
@@ -346,9 +385,9 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid lg:grid-cols-2 gap-12 items-center">
         <div>
-          <div class="inline-block px-4 py-2 bg-brand-blue/20 text-brand-blue rounded-full text-sm font-bold mb-6 tracking-wide uppercase border border-brand-blue/30">Partnership</div>
-          <h2 class="text-3xl lg:text-5xl font-bold mb-6 leading-tight">Ospita PLUGHUB nel tuo locale</h2>
-          <p class="text-lg text-gray-400 mb-10 leading-relaxed">
+          <div class="inline-block px-4 py-2 bg-brand-blue/20 text-brand-blue rounded-full text-sm font-bold mb-6 tracking-wide uppercase border border-brand-blue/30" data-i18n="partnership.badge">Partnership</div>
+          <h2 class="text-3xl lg:text-5xl font-bold mb-6 leading-tight" data-i18n="partnership.title">Ospita PLUGHUB nel tuo locale</h2>
+          <p class="text-lg text-gray-400 mb-10 leading-relaxed" data-i18n="partnership.subtitle">
             Installazione a costo zero. Commissione su ogni noleggio. Zero gestione per lo staff.
           </p>
 
@@ -358,8 +397,8 @@
                 <i class="fa-solid fa-users text-xl"></i>
               </div>
               <div>
-                <h4 class="font-bold text-lg mb-1 text-white">Attrai clienti</h4>
-                <p class="text-sm text-gray-400">Un servizio utile che aumenta il valore percepito.</p>
+                <h4 class="font-bold text-lg mb-1 text-white" data-i18n="partnership.feature1.title">Attrai clienti</h4>
+                <p class="text-sm text-gray-400" data-i18n="partnership.feature1.desc">Un servizio utile che aumenta il valore percepito.</p>
               </div>
             </div>
             <div class="flex items-start gap-4">
@@ -367,26 +406,26 @@
                 <i class="fa-solid fa-handshake text-xl"></i>
               </div>
               <div>
-                <h4 class="font-bold text-lg mb-1 text-white">Guadagno condiviso</h4>
-                <p class="text-sm text-gray-400">Entrate su ogni noleggio senza investimenti.</p>
+                <h4 class="font-bold text-lg mb-1 text-white" data-i18n="partnership.feature2.title">Guadagno condiviso</h4>
+                <p class="text-sm text-gray-400" data-i18n="partnership.feature2.desc">Entrate su ogni noleggio senza investimenti.</p>
               </div>
             </div>
           </div>
 
           <div class="mt-10 flex flex-col sm:flex-row gap-3">
-            <a href="#contatti" class="btn-blue px-8 py-4 rounded-full font-bold text-center">Contattaci</a>
-            <a href="#mappa" class="btn-white-outline px-8 py-4 rounded-full font-bold text-center">Vedi la mappa</a>
+            <a href="#contatti" class="btn-blue px-8 py-4 rounded-full font-bold text-center" data-i18n="partnership.cta.contact">Contattaci</a>
+            <a href="#mappa" class="btn-white-outline px-8 py-4 rounded-full font-bold text-center" data-i18n="partnership.cta.map">Vedi la mappa</a>
           </div>
         </div>
 
         <div class="bg-gray-800 rounded-3xl p-8 border border-gray-700 shadow-xl">
-          <h3 class="text-xl font-bold mb-4">Cosa serve?</h3>
+          <h3 class="text-xl font-bold mb-4" data-i18n="partnership.requirements.title">Cosa serve?</h3>
           <ul class="space-y-3 text-gray-300">
-            <li class="flex gap-3"><i class="fa-solid fa-check text-brand-blue mt-1"></i><span>Un punto vicino alla cassa (visibile)</span></li>
-            <li class="flex gap-3"><i class="fa-solid fa-check text-brand-blue mt-1"></i><span>Una presa di corrente</span></li>
-            <li class="flex gap-3"><i class="fa-solid fa-check text-brand-blue mt-1"></i><span>Stop: lo staff non gestisce nulla</span></li>
+            <li class="flex gap-3"><i class="fa-solid fa-check text-brand-blue mt-1"></i><span data-i18n="partnership.requirements.item1">Un punto vicino alla cassa (visibile)</span></li>
+            <li class="flex gap-3"><i class="fa-solid fa-check text-brand-blue mt-1"></i><span data-i18n="partnership.requirements.item2">Una presa di corrente</span></li>
+            <li class="flex gap-3"><i class="fa-solid fa-check text-brand-blue mt-1"></i><span data-i18n="partnership.requirements.item3">Stop: lo staff non gestisce nulla</span></li>
           </ul>
-          <div class="mt-6 text-sm text-gray-400">
+          <div class="mt-6 text-sm text-gray-400" data-i18n="partnership.requirements.note">
             Scrivici e ti mandiamo una proposta in 2 minuti.
           </div>
         </div>
@@ -398,47 +437,47 @@
   <section id="faq" class="py-16 bg-brand-black border-t border-gray-900">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-10">
-        <h2 class="text-3xl lg:text-4xl font-bold text-white">FAQ</h2>
-        <p class="text-gray-400 mt-2">Risposte rapide alle domande più comuni.</p>
+        <h2 class="text-3xl lg:text-4xl font-bold text-white" data-i18n="faq.title">FAQ</h2>
+        <p class="text-gray-400 mt-2" data-i18n="faq.subtitle">Risposte rapide alle domande più comuni.</p>
       </div>
 
       <div class="space-y-4">
         <div class="faq-item bg-gray-900 border border-gray-800 rounded-2xl p-5">
           <button class="w-full flex items-center justify-between text-left" data-faq>
-            <span class="font-bold">Come funziona?</span>
+            <span class="font-bold" data-i18n="faq.q1.question">Come funziona?</span>
             <i class="fa-solid fa-chevron-down faq-icon transition-transform"></i>
           </button>
-          <div class="faq-answer text-gray-400">
+          <div class="faq-answer text-gray-400" data-i18n="faq.q1.answer">
             Ritiri un powerbank in una stazione e lo restituisci in qualunque altra. Paghi in base al tempo.
           </div>
         </div>
 
         <div class="faq-item bg-gray-900 border border-gray-800 rounded-2xl p-5">
           <button class="w-full flex items-center justify-between text-left" data-faq>
-            <span class="font-bold">Devo installare un'app?</span>
+            <span class="font-bold" data-i18n="faq.q2.question">Devo installare un'app?</span>
             <i class="fa-solid fa-chevron-down faq-icon transition-transform"></i>
           </button>
-          <div class="faq-answer text-gray-400">
+          <div class="faq-answer text-gray-400" data-i18n="faq.q2.answer">
             Dipende dal flusso di pagamento scelto. In generale puoi pagare con carta / app.
           </div>
         </div>
 
         <div class="faq-item bg-gray-900 border border-gray-800 rounded-2xl p-5">
           <button class="w-full flex items-center justify-between text-left" data-faq>
-            <span class="font-bold">La mappa non si vede: perché?</span>
+            <span class="font-bold" data-i18n="faq.q3.question">La mappa non si vede: perché?</span>
             <i class="fa-solid fa-chevron-down faq-icon transition-transform"></i>
           </button>
-          <div class="faq-answer text-gray-400">
+          <div class="faq-answer text-gray-400" data-i18n="faq.q3.answer">
             La mappa usa Google Maps e richiede il consenso ai cookie di terze parti. La lista rimane sempre visibile.
           </div>
         </div>
 
         <div class="faq-item bg-gray-900 border border-gray-800 rounded-2xl p-5">
           <button class="w-full flex items-center justify-between text-left" data-faq>
-            <span class="font-bold">Cosa succede se non riconsegno il powerbank?</span>
+            <span class="font-bold" data-i18n="faq.q4.question">Cosa succede se non riconsegno il powerbank?</span>
             <i class="fa-solid fa-chevron-down faq-icon transition-transform"></i>
           </button>
-          <div class="faq-answer text-gray-400">
+          <div class="faq-answer text-gray-400" data-i18n="faq.q4.answer">
             Se non riconsegui il powerbank entro 24 ore dal prelievo, ti verrà addebitata automaticamente sulla carta utilizzata una penale di 30€. In questo caso il dispositivo diventa di tua proprietà.
           </div>
         </div>
@@ -450,17 +489,17 @@
   <section id="contatti" class="py-16 bg-gray-900 border-t border-gray-800">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-10">
-        <h2 class="text-3xl lg:text-4xl font-bold text-white">Contatti</h2>
-        <p class="text-gray-400 mt-2">Scrivici e ti rispondiamo velocemente.</p>
+        <h2 class="text-3xl lg:text-4xl font-bold text-white" data-i18n="contact.title">Contatti</h2>
+        <p class="text-gray-400 mt-2" data-i18n="contact.subtitle">Scrivici e ti rispondiamo velocemente.</p>
       </div>
 
       <div class="bg-gray-800 rounded-3xl p-8 border border-gray-700">
         <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
           <div class="text-gray-300">
-            <div class="font-bold text-white">Email</div>
+            <div class="font-bold text-white" data-i18n="contact.email.label">Email</div>
             <div class="text-sm text-gray-400">weesrl.info@gmail.com</div>
           </div>
-          <a href="mailto:weesrl.info@gmail.com" class="btn-blue px-8 py-4 rounded-full font-bold text-center w-full sm:w-auto">
+          <a href="mailto:weesrl.info@gmail.com" class="btn-blue px-8 py-4 rounded-full font-bold text-center w-full sm:w-auto" data-i18n="contact.email.cta">
             Invia email
           </a>
         </div>
@@ -479,31 +518,31 @@
             </div>
             <span class="font-bold text-2xl tracking-tight"><span class="text-white">PLUG</span><span class="text-brand-blue">HUB</span></span>
           </div>
-          <p class="text-gray-500 text-sm leading-relaxed">
+          <p class="text-gray-500 text-sm leading-relaxed" data-i18n="footer.tagline">
             Il servizio di power bank sharing. Ricarica ovunque, in qualsiasi momento.
           </p>
         </div>
 
         <div>
-          <h4 class="font-bold text-lg mb-4 text-white">Link</h4>
+          <h4 class="font-bold text-lg mb-4 text-white" data-i18n="footer.links.title">Link</h4>
           <ul class="space-y-2 text-gray-500 text-sm">
-            <li><a href="#mappa" class="hover:text-brand-blue">Mappa</a></li>
-            <li><a href="#prezzi" class="hover:text-brand-blue">Prezzi</a></li>
-            <li><a href="#per-locali" class="hover:text-brand-blue">Per i Locali</a></li>
-            <li><a href="#faq" class="hover:text-brand-blue">FAQ</a></li>
+            <li><a href="#mappa" class="hover:text-brand-blue" data-i18n="nav.map">Mappa</a></li>
+            <li><a href="#prezzi" class="hover:text-brand-blue" data-i18n="nav.prices">Prezzi</a></li>
+            <li><a href="#per-locali" class="hover:text-brand-blue" data-i18n="nav.venues">Per i Locali</a></li>
+            <li><a href="#faq" class="hover:text-brand-blue" data-i18n="nav.faq">FAQ</a></li>
           </ul>
         </div>
 
         <div>
-          <h4 class="font-bold text-lg mb-4 text-white">Legale</h4>
+          <h4 class="font-bold text-lg mb-4 text-white" data-i18n="footer.legal.title">Legale</h4>
           <ul class="space-y-2 text-gray-500 text-sm">
-            <li><a href="privacy-policy.html" class="hover:text-brand-blue">Privacy Policy</a></li>
-            <li><a href="cookie-policy.html" class="hover:text-brand-blue">Cookie Policy</a></li>
+            <li><a href="privacy-policy.html" class="hover:text-brand-blue" data-i18n="footer.legal.privacy">Privacy Policy</a></li>
+            <li><a href="cookie-policy.html" class="hover:text-brand-blue" data-i18n="footer.legal.cookies">Cookie Policy</a></li>
           </ul>
         </div>
 
         <div>
-          <h4 class="font-bold text-lg mb-4 text-white">Contatti</h4>
+          <h4 class="font-bold text-lg mb-4 text-white" data-i18n="footer.contact.title">Contatti</h4>
           <ul class="space-y-2 text-gray-500 text-sm">
             <li class="flex items-center gap-3">
               <i class="fa-solid fa-envelope text-brand-blue text-xs"></i>
@@ -514,8 +553,8 @@
       </div>
 
       <div class="border-t border-gray-900 mt-10 pt-8 text-gray-600 text-sm">
-        <p class="font-semibold text-gray-400">PLUGHUB è un brand di Wee S.R.L.S.</p>
-        <p class="mt-1">Tutti i diritti riservati © 2026</p>
+        <p class="font-semibold text-gray-400" data-i18n="footer.company">PLUGHUB è un brand di Wee S.R.L.S.</p>
+        <p class="mt-1" data-i18n="footer.copyright">Tutti i diritti riservati © 2026</p>
       </div>
     </div>
   </footer>
