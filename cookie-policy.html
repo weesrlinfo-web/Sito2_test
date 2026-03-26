@@ -236,9 +236,17 @@
                     <p class="leading-relaxed mb-4">
                         Il rifiuto del consenso non pregiudica la navigazione del sito e non impedisce la consultazione dei contenuti essenziali.
                     </p>
-                    <p class="leading-relaxed">
+                    <p class="leading-relaxed mb-6">
                         L'utente può in ogni momento modificare o revocare le proprie scelte tramite il link <strong class="text-white">"Rivedi preferenze cookie"</strong> presente nel footer del sito o in altra area sempre accessibile.
                     </p>
+
+                    <!-- Bottone Modifica Preferenze Cookie -->
+                    <div class="bg-gray-900/50 border border-gray-800 rounded-2xl p-6 text-center">
+                        <p class="text-gray-400 text-sm mb-4" data-i18n="modifyConsent.text">Vuoi modificare le tue preferenze sui cookie?</p>
+                        <a href="index.html?openCookieBanner=1" class="btn-blue inline-block px-8 py-3 rounded-full font-semibold text-sm" data-i18n="modifyConsent.button">
+                            Modifica preferenze cookie
+                        </a>
+                    </div>
                 </div>
 
                 <!-- Sezione 7 -->
@@ -352,6 +360,10 @@
                     p2: "Il rifiuto del consenso non pregiudica la navigazione del sito e non impedisce la consultazione dei contenuti essenziali.",
                     p3: "L'utente può in ogni momento modificare o revocare le proprie scelte tramite il link <strong class=\"text-white\">\"Rivedi preferenze cookie\"</strong> presente nel footer del sito o in altra area sempre accessibile."
                 },
+                modifyConsent: {
+                    text: "Vuoi modificare le tue preferenze sui cookie?",
+                    button: "Modifica preferenze cookie"
+                },
                 section7: {
                     title: "7. Destinatari e trasferimenti extra SEE",
                     content: "Per il servizio Google Maps, i dati possono essere trattati da Google Ireland Limited e, nei limiti previsti dall'organizzazione del servizio, da Google LLC o altre società del gruppo Google. Eventuali trasferimenti di dati fuori dallo Spazio Economico Europeo avvengono secondo i meccanismi dichiarati dal fornitore e applicabili al caso concreto."
@@ -418,6 +430,10 @@
                     p1: "On first access, no Google Maps content is loaded until the user has given the relevant consent.",
                     p2: "Refusing consent does not prejudice site navigation and does not prevent consultation of essential content.",
                     p3: "The user can modify or revoke their choices at any time via the <strong class=\"text-white\">\"Review cookie preferences\"</strong> link in the site footer or in another always accessible area."
+                },
+                modifyConsent: {
+                    text: "Do you want to change your cookie preferences?",
+                    button: "Modify cookie preferences"
                 },
                 section7: {
                     title: "7. Recipients and transfers outside the EEA",
