@@ -139,7 +139,7 @@
                             </button>
                         </div>
                     </div>
-                    <a href="/" onclick="return goBack()" class="btn-blue px-5 py-2.5 rounded-full font-semibold text-sm" data-i18n="back">
+                    <a href="https://www.plughub.it" class="btn-blue px-5 py-2.5 rounded-full font-semibold text-sm" data-i18n="back">
                         Torna al Sito
                     </a>
                 </div>
@@ -586,15 +586,6 @@
         // Load saved language
         updatePageContent();
         updateLangSelector();
-
-        // Back button functionality - returns to referring page if available
-        function goBack() {
-            if (document.referrer && document.referrer !== window.location.href && document.referrer.includes(window.location.hostname)) {
-                history.back();
-                return false; // Prevent default link behavior
-            }
-            return true; // Allow default behavior (href="/")
-        }
     </script>
 
 </body>
