@@ -1476,7 +1476,17 @@
      // Geolocation (distance)
      initGeolocation();
    
-     // Cookie consent
+     // Cookie consent - con supporto per "Modifica preferenze"
+     const urlParams = new URLSearchParams(window.location.search);
+     const shouldOpenBanner = urlParams.get('openCookieBanner') === '1';
+
+     if (shouldOpenBanner) {
+       // Rimuovi il parametro dall'URL senza ricaricare
+       window.history.replaceState({}, '', window.location.pathname);
+       // Resetta il consenso per forzare la visualizzazione del banner
+       localStorage.removeItem(CONFIG.COOKIE_CONSENT_KEY);
+     }
+
      const consent = getConsent();
      if (consent === 'accepted') {
        hideCookieBanner();
