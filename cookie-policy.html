@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy | PLUGHUB</title>
-    <meta name="description" content="Privacy Policy di PLUGHUB - Informazioni sul trattamento dei dati personali ai sensi dell'art. 13 GDPR.">
+    <title>Cookie Policy | PLUGHUB</title>
+    <meta name="description" content="Cookie Policy di PLUGHUB - Informazioni sull'uso dei cookie.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -47,7 +47,7 @@
             transform: translateY(-2px);
             box-shadow: 0 8px 25px -5px rgba(65, 179, 231, 0.5);
         }
-
+        /* Language Selector Styles */
         .lang-btn {
             background: rgba(65, 179, 231, 0.15);
             border: 1px solid rgba(65, 179, 231, 0.35);
@@ -103,48 +103,6 @@
             background: rgba(65, 179, 231, 0.25);
         }
         .hidden { display: none !important; }
-
-        .legal-content h2 {
-            font-size: 1.3rem;
-            line-height: 1.4;
-            font-weight: 700;
-            color: #FFFFFF;
-            margin-top: 2rem;
-            margin-bottom: 0.9rem;
-        }
-        .legal-content h3 {
-            font-size: 1.05rem;
-            line-height: 1.5;
-            font-weight: 600;
-            color: #FFFFFF;
-            margin-top: 1.2rem;
-            margin-bottom: 0.5rem;
-        }
-        .legal-content p {
-            color: #D1D5DB;
-            line-height: 1.9;
-            margin-bottom: 1rem;
-        }
-        .legal-content ul {
-            color: #D1D5DB;
-            line-height: 1.9;
-            margin: 0 0 1rem 1.25rem;
-            padding-left: 1rem;
-            list-style: disc;
-        }
-        .legal-content li {
-            margin-bottom: 0.45rem;
-        }
-        .legal-content a {
-            color: #41B3E7;
-            text-decoration: none;
-        }
-        .legal-content a:hover {
-            text-decoration: underline;
-        }
-        .legal-content strong {
-            color: #FFFFFF;
-        }
     </style>
 </head>
 <body class="font-sans antialiased bg-brand-black text-white">
@@ -161,10 +119,10 @@
                         <span class="text-white">PLUG</span><span class="text-brand-blue">HUB</span>
                     </span>
                 </a>
-
                 <div class="flex items-center gap-3">
+                    <!-- Language Selector -->
                     <div class="language-selector relative">
-                        <button id="lang-toggle" class="lang-btn flex items-center gap-2 px-3 py-2 rounded-full font-semibold text-sm" aria-label="Seleziona lingua">
+                        <button id="lang-toggle" class="lang-btn flex items-center gap-2 px-3 py-2 rounded-full font-semibold text-sm">
                             <i class="fa-solid fa-globe"></i>
                             <span id="current-lang">IT</span>
                             <i class="fa-solid fa-chevron-down text-xs"></i>
@@ -180,8 +138,7 @@
                             </button>
                         </div>
                     </div>
-
-                    <a href="./" class="btn-blue px-5 py-2.5 rounded-full font-semibold text-sm" id="back-btn">
+                    <a href="./" class="btn-blue px-5 py-2.5 rounded-full font-semibold text-sm" data-i18n="back">
                         Torna al Sito
                     </a>
                 </div>
@@ -194,12 +151,149 @@
     <!-- Content -->
     <section class="py-16 lg:py-24 bg-brand-black">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h1 id="page-title" class="text-3xl lg:text-5xl font-bold text-white mb-8">
-                Informativa sul Trattamento dei Dati Personali (Art. 13 GDPR)
-            </h1>
-            <p id="page-updated" class="text-gray-400 mb-8">Ultimo aggiornamento: 26 Marzo 2026</p>
+            <h1 class="text-3xl lg:text-5xl font-bold text-white mb-8" data-i18n="title">Informativa sui Cookie</h1>
+            <p class="text-gray-400 mb-8" data-i18n="updated">Ultimo aggiornamento: 26 Marzo 2026</p>
 
-            <div id="privacy-content" class="legal-content"></div>
+            <div class="space-y-8 text-gray-300">
+
+                <!-- Introduzione -->
+                <div data-i18n-section="intro">
+                    <p class="leading-relaxed">
+                        La presente Cookie Policy è resa da <strong class="text-white">Wee S.R.L.S.</strong>, con sede legale in Via delle Industrie 1/A, 35010 Limena (PD), P.IVA 05774330285, REA [REA], e-mail: <strong class="text-white">info@plughub.it</strong>, PEC: <strong class="text-white">wee@pec.it</strong>, in qualità di titolare del trattamento, in relazione al sito <strong class="text-white">www.plughub.it</strong>.
+                    </p>
+                </div>
+
+                <!-- Sezione 1 -->
+                <div data-i18n-section="section1">
+                    <h2 class="text-xl font-bold text-white mb-4">1. Cosa sono cookie e strumenti analoghi</h2>
+                    <p class="leading-relaxed">
+                        I cookie sono piccoli file di testo che i siti visitati dall'utente possono archiviare sul dispositivo dell'utente. Funzioni analoghe possono essere svolte anche da altri strumenti di tracciamento.
+                    </p>
+                </div>
+
+                <!-- Sezione 2 -->
+                <div data-i18n-section="section2">
+                    <h2 class="text-xl font-bold text-white mb-4">2. Tipologie di strumenti utilizzati da questo sito</h2>
+                    <p class="leading-relaxed mb-4">
+                        Il sito utilizza esclusivamente:
+                    </p>
+                    <ul class="list-disc list-inside space-y-2 ml-4 mb-4">
+                        <li><strong class="text-white">a)</strong> strumenti tecnici strettamente necessari al funzionamento del sito e, ove adottati, alla memorizzazione delle preferenze privacy/cookie espresse dall'utente;</li>
+                        <li><strong class="text-white">b)</strong> il servizio di terza parte Google Maps, caricato solo previo consenso dell'utente.</li>
+                    </ul>
+                    <p class="leading-relaxed">
+                        Il sito, nella configurazione qui descritta, non utilizza cookie analytics propri né strumenti di profilazione propri.
+                    </p>
+                </div>
+
+                <!-- Sezione 3 -->
+                <div data-i18n-section="section3">
+                    <h2 class="text-xl font-bold text-white mb-4">3. Cookie e strumenti tecnici</h2>
+                    <p class="leading-relaxed">
+                        Gli strumenti tecnici sono utilizzati per consentire la corretta erogazione del sito, la sicurezza della navigazione, l'eventuale memorizzazione della scelta effettuata dall'utente tramite il banner cookie e l'esecuzione di funzioni richieste dall'utente. Tali strumenti non richiedono consenso.
+                    </p>
+                </div>
+
+                <!-- Sezione 4 -->
+                <div data-i18n-section="section4">
+                    <h2 class="text-xl font-bold text-white mb-4">4. Google Maps</h2>
+                    <p class="leading-relaxed mb-4">
+                        La mappa interattiva delle stazioni è fornita tramite Google Maps. Il relativo contenuto non viene caricato automaticamente al primo accesso, ma solo a seguito di specifico consenso dell'utente.
+                    </p>
+                    <p class="leading-relaxed mb-4">
+                        Prima del consenso, il sito mantiene disponibile una modalità alternativa non interattiva o non tracciante, quale la lista delle stazioni.
+                    </p>
+                    <p class="leading-relaxed mb-4">
+                        A seguito del consenso, Google Maps può trattare dati relativi alla navigazione e al dispositivo dell'utente, inclusi, a titolo esemplificativo:
+                    </p>
+                    <ul class="list-disc list-inside space-y-2 ml-4 mb-4">
+                        <li>indirizzo IP</li>
+                        <li>informazioni sul browser e sul dispositivo</li>
+                        <li>dati tecnici di richiesta</li>
+                        <li>eventuali dati di interazione con la mappa</li>
+                        <li>dati di posizione (se autorizzati dall'utente nelle impostazioni del proprio browser o dispositivo)</li>
+                    </ul>
+                    <p class="leading-relaxed">
+                        Google può inoltre utilizzare cookie e tecnologie analoghe secondo le proprie policy.
+                    </p>
+                </div>
+
+                <!-- Sezione 5 -->
+                <div data-i18n-section="section5">
+                    <h2 class="text-xl font-bold text-white mb-4">5. Base giuridica</h2>
+                    <p class="leading-relaxed">
+                        Gli strumenti tecnici sono utilizzati sulla base della necessità tecnica di fornire il sito e il servizio richiesto dall'utente. Google Maps viene attivato solo sulla base del consenso libero, specifico, informato e inequivocabile dell'utente.
+                    </p>
+                </div>
+
+                <!-- Sezione 6 -->
+                <div data-i18n-section="section6">
+                    <h2 class="text-xl font-bold text-white mb-4">6. Modalità di raccolta e gestione del consenso</h2>
+                    <p class="leading-relaxed mb-4">
+                        Al primo accesso, nessun contenuto Google Maps viene caricato finché l'utente non abbia prestato il relativo consenso.
+                    </p>
+                    <p class="leading-relaxed mb-4">
+                        Il rifiuto del consenso non pregiudica la navigazione del sito e non impedisce la consultazione dei contenuti essenziali.
+                    </p>
+                    <p class="leading-relaxed mb-6">
+                        L'utente può in ogni momento modificare o revocare le proprie scelte tramite il link <strong class="text-white">"Rivedi preferenze cookie"</strong> presente nel footer del sito o in altra area sempre accessibile.
+                    </p>
+
+                    <!-- Bottone Modifica Preferenze Cookie -->
+                    <div class="bg-gray-900/50 border border-gray-800 rounded-2xl p-6 text-center">
+                        <p class="text-gray-400 text-sm mb-4" data-i18n="modifyConsent.text">Vuoi modificare le tue preferenze sui cookie?</p>
+                        <a href="./?openCookieBanner=1" class="btn-blue inline-block px-8 py-3 rounded-full font-semibold text-sm" data-i18n="modifyConsent.button">
+                            Modifica preferenze cookie
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Sezione 7 -->
+                <div data-i18n-section="section7">
+                    <h2 class="text-xl font-bold text-white mb-4">7. Destinatari e trasferimenti extra SEE</h2>
+                    <p class="leading-relaxed">
+                        Per il servizio Google Maps, i dati possono essere trattati da Google Ireland Limited e, nei limiti previsti dall'organizzazione del servizio, da Google LLC o altre società del gruppo Google. Eventuali trasferimenti di dati fuori dallo Spazio Economico Europeo avvengono secondo i meccanismi dichiarati dal fornitore e applicabili al caso concreto.
+                    </p>
+                </div>
+
+                <!-- Sezione 8 -->
+                <div data-i18n-section="section8">
+                    <h2 class="text-xl font-bold text-white mb-4">8. Hosting e infrastruttura</h2>
+                    <p class="leading-relaxed">
+                        Il sito è pubblicato su infrastruttura GitHub Pages. L'eventuale trattamento di log tecnici o dati infrastrutturali da parte dell'hosting provider attiene all'erogazione e alla sicurezza del servizio e non costituisce, di per sé, uso di cookie non tecnici sul terminale dell'utente. Tali trattamenti sono descritti nella Privacy Policy.
+                    </p>
+                </div>
+
+                <!-- Sezione 9 -->
+                <div data-i18n-section="section9">
+                    <h2 class="text-xl font-bold text-white mb-4">9. Come disabilitare i cookie dal browser</h2>
+                    <p class="leading-relaxed mb-4">
+                        L'utente può inoltre gestire o cancellare i cookie tramite le impostazioni del proprio browser. Tale operazione può tuttavia incidere sul corretto funzionamento di alcuni servizi.
+                    </p>
+                    <ul class="list-disc list-inside mt-4 space-y-2 ml-4">
+                        <li><a href="https://support.google.com/chrome/answer/95647" target="_blank" class="text-brand-blue hover:underline">Guida Chrome</a></li>
+                        <li><a href="https://support.apple.com/it-it/guide/safari/sfri11471/mac" target="_blank" class="text-brand-blue hover:underline">Guida Safari</a></li>
+                        <li><a href="https://support.mozilla.org/it/kb/Gestione%20dei%20cookie" target="_blank" class="text-brand-blue hover:underline">Guida Firefox</a></li>
+                        <li><a href="https://support.microsoft.com/it-it/microsoft-edge/eliminare-i-cookie-in-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09" target="_blank" class="text-brand-blue hover:underline">Guida Edge</a></li>
+                    </ul>
+                </div>
+
+                <!-- Sezione 10 -->
+                <div data-i18n-section="section10">
+                    <h2 class="text-xl font-bold text-white mb-4">10. Aggiornamenti</h2>
+                    <p class="leading-relaxed">
+                        La presente Cookie Policy può essere aggiornata in qualsiasi momento, anche in conseguenza di modifiche normative, tecniche o organizzative. La versione aggiornata è pubblicata su questa pagina con indicazione della data di ultimo aggiornamento.
+                    </p>
+                </div>
+
+                <!-- Sezione 11 -->
+                <div data-i18n-section="section11">
+                    <h2 class="text-xl font-bold text-white mb-4">11. Contatti</h2>
+                    <p class="leading-relaxed">
+                        Per informazioni in materia di privacy e cookie: <strong class="text-white">info@plughub.it</strong>
+                    </p>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -209,10 +303,7 @@
             <div class="flex flex-col md:flex-row justify-between items-center gap-4">
                 <div class="text-gray-600 text-sm text-center md:text-left">
                     <p class="font-semibold text-gray-400 mb-1">PLUGHUB è un brand di Wee S.R.L.S.</p>
-                    <p id="footer-company-it">
-                        Wee S.R.L.S. | Sede Legale: Via delle Industrie 1/A, 35010 Limena (PD) |
-                        P.IVA 05774330285 | REA: [INSERIRE REA] | PEC: wee@pec.it
-                    </p>
+                    <p>Wee S.R.L.S. | Sede Legale: Via delle industrie 1/A, 35010, Limena (PD) | P.IVA 05774330285 | REA: [Tuo Numero REA] | Capitale Sociale: 9.000 € i.v. | PEC: wee@pec.it</p>
                     <p class="mt-1">Tutti i diritti riservati © 2026</p>
                 </div>
                 <div class="flex gap-6 text-sm text-gray-500">
@@ -224,492 +315,149 @@
     </footer>
 
     <script>
+        // Translations for Cookie Policy (IT/EN only)
         const translations = {
             it: {
-                pageTitle: "Informativa sul Trattamento dei Dati Personali (Art. 13 GDPR)",
-                pageUpdated: "Ultimo aggiornamento: 26 Marzo 2026",
                 back: "Torna al Sito",
-                footerCompany: "Wee S.R.L.S. | Sede Legale: Via delle Industrie 1/A, 35010 Limena (PD) | P.IVA 05774330285 | REA: [INSERIRE REA] | PEC: wee@pec.it",
-                content: `
-                    <p>
-                        La presente informativa è resa da <strong>Wee S.R.L.S.</strong>, con sede legale in
-                        Via delle Industrie 1/A, 35010 Limena (PD), P.IVA 05774330285, REA [INSERIRE REA],
-                        e-mail <a href="mailto:info@plughub.it">info@plughub.it</a>, PEC
-                        <a href="mailto:wee@pec.it">wee@pec.it</a>, in qualità di
-                        <strong>Titolare del trattamento</strong>, con riferimento al sito <strong>www.plughub.it</strong>.
-                    </p>
-
-                    <h2>1. Ambito di applicazione</h2>
-                    <p>
-                        La presente informativa riguarda i dati personali trattati attraverso il sito www.plughub.it
-                        quando l’utente naviga sul sito, consulta la lista delle stazioni, sceglie di attivare
-                        la mappa interattiva tramite Google Maps, abilita eventualmente la funzione di posizione
-                        del browser o del dispositivo per visualizzare le distanze, oppure contatta il Titolare
-                        tramite gli indirizzi e-mail pubblicati sul sito.
-                    </p>
-
-                    <h2>2. Categorie di dati trattati</h2>
-
-                    <h3>a) Dati di navigazione e dati tecnici</h3>
-                    <p>
-                        Durante la normale navigazione del sito possono essere trattati dati tecnici e di connessione,
-                        quali, a titolo esemplificativo, indirizzo IP, data e ora della richiesta, informazioni tecniche
-                        sul browser e sul dispositivo, dati relativi al sistema operativo e altre informazioni necessarie
-                        alla corretta erogazione delle pagine e alla sicurezza del servizio.
-                    </p>
-                    <p>
-                        Il sito è attualmente pubblicato tramite <strong>GitHub Pages</strong>. Nell’ambito di tale
-                        infrastruttura, possono essere trattati log e dati tecnici per finalità di sicurezza,
-                        disponibilità del servizio e prevenzione di abusi.
-                    </p>
-
-                    <h3>b) Dati trattati in caso di attivazione della mappa interattiva</h3>
-                    <p>
-                        La mappa interattiva delle stazioni è fornita tramite <strong>Google Maps</strong> e non viene
-                        caricata automaticamente al primo accesso, ma solo dopo il consenso dell’utente attraverso
-                        il meccanismo di gestione delle preferenze cookie del sito.
-                    </p>
-                    <p>
-                        Una volta attivata, la fruizione del servizio può comportare il trattamento, anche da parte di Google,
-                        di dati quali indirizzo IP, dati relativi al browser e al dispositivo, referrer URL, dati tecnici
-                        della richiesta, informazioni di interazione con la mappa e, nei limiti consentiti dalle impostazioni
-                        dell’utente, dati di localizzazione.
-                    </p>
-
-                    <h3>c) Dati di posizione del dispositivo, se l’utente li abilita</h3>
-                    <p>
-                        Se l’utente sceglie volontariamente di autorizzare la funzione di posizione del browser o del dispositivo
-                        per visualizzare le distanze rispetto alle stazioni, possono essere trattati dati di geolocalizzazione
-                        o prossimità resi disponibili dal browser o dal dispositivo stesso.
-                    </p>
-                    <p>
-                        Tale funzione è facoltativa. Il mancato rilascio dell’autorizzazione non impedisce la navigazione del sito
-                        né la consultazione dei contenuti essenziali.
-                    </p>
-                    <p>
-                        Nella configurazione attuale del sito, tali dati non sono utilizzati dal Titolare per finalità di profilazione.
-                        Salvo quanto eventualmente trattato autonomamente da Google una volta attivata la mappa, i dati di posizione
-                        sono utilizzati esclusivamente per la fruizione della funzione richiesta dall’utente e per il tempo tecnico
-                        strettamente necessario.
-                    </p>
-
-                    <h3>d) Dati forniti volontariamente dall’utente tramite e-mail</h3>
-                    <p>
-                        L’invio facoltativo, esplicito e volontario di messaggi agli indirizzi e-mail indicati sul sito comporta
-                        il trattamento dei dati contenuti nella comunicazione, compresi l’indirizzo e-mail del mittente,
-                        l’eventuale nome e cognome, il contenuto del messaggio e ogni altra informazione spontaneamente fornita.
-                    </p>
-
-                    <h2>3. Finalità del trattamento e basi giuridiche</h2>
-                    <p>I dati personali sono trattati per le seguenti finalità:</p>
-                    <ul>
-                        <li>
-                            <strong>consentire la navigazione, la fruizione tecnica del sito, la gestione
-                            dell’infrastruttura e la sicurezza del servizio</strong>.<br>
-                            Base giuridica: <strong>art. 6, par. 1, lett. f) GDPR</strong> – legittimo interesse del Titolare
-                            e dei fornitori tecnici a garantire il corretto funzionamento, la disponibilità e la sicurezza del sito.
-                        </li>
-                        <li>
-                            <strong>mettere a disposizione, su richiesta dell’utente, la mappa interattiva tramite Google Maps</strong>.<br>
-                            Base giuridica: <strong>art. 6, par. 1, lett. a) GDPR</strong> – consenso dell’utente.
-                        </li>
-                        <li>
-                            <strong>utilizzare, se l’utente lo abilita, la funzione di posizione del browser o del dispositivo
-                            per mostrare le distanze o agevolare la consultazione della mappa</strong>.<br>
-                            Base giuridica: <strong>art. 6, par. 1, lett. a) GDPR</strong> – consenso / specifica autorizzazione
-                            dell’utente tramite browser, dispositivo o meccanismi del sito.
-                        </li>
-                        <li>
-                            <strong>gestire richieste di informazioni, contatti commerciali o precontrattuali ricevuti tramite e-mail</strong>.<br>
-                            Base giuridica: <strong>art. 6, par. 1, lett. b) GDPR</strong>, quando il trattamento è necessario
-                            all’esecuzione di misure precontrattuali richieste dall’interessato, oppure
-                            <strong>art. 6, par. 1, lett. f) GDPR</strong> per la gestione ordinaria della corrispondenza.
-                        </li>
-                        <li>
-                            <strong>adempiere ad obblighi di legge o difendere i diritti del Titolare</strong>.<br>
-                            Base giuridica: <strong>art. 6, par. 1, lett. c) GDPR</strong> e, ove applicabile,
-                            <strong>art. 6, par. 1, lett. f) GDPR</strong>.
-                        </li>
-                    </ul>
-
-                    <h2>4. Natura del conferimento dei dati</h2>
-                    <p>
-                        Il conferimento dei dati di navigazione tecnicamente necessari è implicito nell’uso dei protocolli Internet
-                        e nel funzionamento del sito.
-                    </p>
-                    <p>
-                        L’attivazione di <strong>Google Maps</strong> e l’eventuale autorizzazione alla <strong>posizione</strong>
-                        sono invece facoltative. Il mancato consenso impedisce soltanto l’uso della mappa interattiva o della funzione
-                        di distanza, ma non la consultazione dei contenuti essenziali del sito.
-                    </p>
-                    <p>
-                        L’invio di dati tramite e-mail è facoltativo; tuttavia, il mancato conferimento dei dati minimi necessari
-                        può rendere impossibile dare seguito alla richiesta dell’utente.
-                    </p>
-
-                    <h2>5. Destinatari dei dati</h2>
-                    <p>
-                        I dati possono essere trattati, nei limiti delle finalità sopra indicate, da:
-                    </p>
-                    <ul>
-                        <li>personale e collaboratori autorizzati dal Titolare;</li>
-                        <li>fornitori di servizi tecnici e infrastrutturali;</li>
-                        <li>provider del servizio di hosting e pubblicazione del sito;</li>
-                        <li>provider del servizio e-mail utilizzato dal Titolare;</li>
-                        <li>Google, in caso di attivazione di Google Maps o utilizzo di funzionalità connesse;</li>
-                        <li>autorità, enti o soggetti legittimati a ricevere i dati in forza di legge o di provvedimenti legittimi.</li>
-                    </ul>
-
-                    <h2>6. Trasferimenti di dati verso Paesi extra SEE</h2>
-                    <p>
-                        L’uso di servizi di terze parti quali <strong>GitHub Pages</strong> e <strong>Google Maps</strong>
-                        può comportare il trasferimento di dati personali verso Paesi situati al di fuori dello Spazio Economico Europeo.
-                    </p>
-                    <p>
-                        Tali trasferimenti avvengono sulla base dei meccanismi dichiarati dai rispettivi fornitori, inclusi, ove applicabili,
-                        decisioni di adeguatezza, <strong>Data Privacy Framework</strong> e/o
-                        <strong>Standard Contractual Clauses</strong>.
-                    </p>
-
-                    <h2>7. Periodo di conservazione</h2>
-                    <p>
-                        I dati sono conservati per un periodo non superiore a quello necessario al conseguimento delle finalità per cui
-                        sono trattati, nel rispetto del principio di limitazione della conservazione.
-                    </p>
-                    <ul>
-                        <li>
-                            i <strong>dati tecnici e infrastrutturali</strong> sono conservati secondo i tempi e i criteri stabiliti
-                            dai provider competenti per finalità di sicurezza, continuità del servizio e prevenzione di abusi;
-                        </li>
-                        <li>
-                            i <strong>dati connessi all’attivazione della mappa</strong> e all’eventuale uso della posizione
-                            sono trattati per il tempo necessario alla fruizione della funzione richiesta, fatto salvo l’eventuale
-                            trattamento autonomo del provider terzo;
-                        </li>
-                        <li>
-                            i <strong>dati contenuti nelle richieste inviate via e-mail</strong> sono conservati per il tempo
-                            necessario a gestire la richiesta e, di regola, non oltre <strong>12 mesi dall’ultimo contatto</strong>,
-                            salvo ulteriore corrispondenza, avvio di trattative, instaurazione di un rapporto contrattuale,
-                            obblighi di legge o necessità di difesa in giudizio.
-                        </li>
-                    </ul>
-
-                    <h2>8. Modalità del trattamento e misure di sicurezza</h2>
-                    <p>
-                        Il trattamento è effettuato con strumenti elettronici e con logiche strettamente correlate alle finalità indicate,
-                        nel rispetto dei principi di liceità, correttezza, trasparenza, minimizzazione, esattezza, limitazione
-                        della conservazione e integrità / riservatezza.
-                    </p>
-                    <p>
-                        Il Titolare adotta misure tecniche e organizzative adeguate al rischio del trattamento.
-                    </p>
-
-                    <h2>9. Processi decisionali automatizzati e profilazione</h2>
-                    <p>
-                        Nella configurazione attuale del sito, il Titolare <strong>non effettua</strong> processi decisionali
-                        unicamente automatizzati che producano effetti giuridici sull’interessato ai sensi dell’art. 22 GDPR,
-                        né svolge attività di profilazione propria tramite il sito.
-                    </p>
-                    <p>
-                        Resta fermo che eventuali servizi di terze parti attivati dall’utente operano secondo le rispettive policy.
-                    </p>
-
-                    <h2>10. Diritti dell’interessato</h2>
-                    <p>
-                        Nei casi previsti dagli artt. 15-22 GDPR, l’interessato può esercitare i seguenti diritti:
-                    </p>
-                    <ul>
-                        <li>ottenere la conferma che sia o meno in corso un trattamento di dati personali che lo riguardano;</li>
-                        <li>accedere ai propri dati personali;</li>
-                        <li>chiederne la rettifica;</li>
-                        <li>chiederne la cancellazione;</li>
-                        <li>ottenere la limitazione del trattamento;</li>
-                        <li>opporsi al trattamento, nei casi previsti dalla legge;</li>
-                        <li>ricevere i dati in formato strutturato, di uso comune e leggibile da dispositivo automatico, ove applicabile;</li>
-                        <li>revocare in qualsiasi momento il consenso precedentemente prestato, senza pregiudicare la liceità del trattamento precedente alla revoca;</li>
-                        <li>non essere sottoposto a decisioni basate unicamente su trattamenti automatizzati, nei casi previsti dall’art. 22 GDPR.</li>
-                    </ul>
-                    <p>
-                        Le richieste possono essere inviate a:
-                        <a href="mailto:info@plughub.it">info@plughub.it</a>.
-                    </p>
-
-                    <h2>11. Diritto di proporre reclamo</h2>
-                    <p>
-                        L’interessato ha il diritto di proporre reclamo al <strong>Garante per la protezione dei dati personali</strong>
-                        qualora ritenga che il trattamento dei dati personali che lo riguardano avvenga in violazione della normativa applicabile,
-                        nonché di adire l’autorità giudiziaria competente.
-                    </p>
-
-                    <h2>12. Link a siti e servizi di terzi</h2>
-                    <p>
-                        Il sito può contenere collegamenti o integrazioni verso servizi di terzi, inclusi servizi Google.
-                        Quando l’utente interagisce con tali servizi, il trattamento dei dati avviene secondo le policy del relativo fornitore.
-                    </p>
-                    <p>
-                        Per maggiori informazioni si invita l’utente a consultare anche:
-                    </p>
-                    <ul>
-                        <li><a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener noreferrer">Privacy Statement di GitHub</a>;</li>
-                        <li><a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy di Google</a>;</li>
-                        <li><a href="cookie-policy.html">Cookie Policy</a> del sito.</li>
-                    </ul>
-
-                    <h2>13. Modifiche alla presente informativa</h2>
-                    <p>
-                        La presente informativa può essere aggiornata in qualsiasi momento per modifiche normative, tecniche
-                        o organizzative. La versione aggiornata è pubblicata su questa pagina con indicazione della data di ultimo aggiornamento.
-                    </p>
-
-                    <h2>14. Contatti</h2>
-                    <p>
-                        Per qualsiasi richiesta relativa al trattamento dei dati personali è possibile contattare il Titolare ai seguenti recapiti:
-                    </p>
-                    <p>
-                        <strong>E-mail:</strong> <a href="mailto:info@plughub.it">info@plughub.it</a><br>
-                        <strong>PEC:</strong> <a href="mailto:wee@pec.it">wee@pec.it</a>
-                    </p>
-                `
+                title: "Informativa sui Cookie",
+                updated: "Ultimo aggiornamento: 26 Marzo 2026",
+                intro: "La presente Cookie Policy è resa da <strong class=\"text-white\">Wee S.R.L.S.</strong>, con sede legale in Via delle Industrie 1/A, 35010 Limena (PD), P.IVA 05774330285, REA [REA], e-mail: <strong class=\"text-white\">info@plughub.it</strong>, PEC: <strong class=\"text-white\">wee@pec.it</strong>, in qualità di titolare del trattamento, in relazione al sito <strong class=\"text-white\">www.plughub.it</strong>.",
+                section1: {
+                    title: "1. Cosa sono cookie e strumenti analoghi",
+                    content: "I cookie sono piccoli file di testo che i siti visitati dall'utente possono archiviare sul dispositivo dell'utente. Funzioni analoghe possono essere svolte anche da altri strumenti di tracciamento."
+                },
+                section2: {
+                    title: "2. Tipologie di strumenti utilizzati da questo sito",
+                    intro: "Il sito utilizza esclusivamente:",
+                    item1: "strumenti tecnici strettamente necessari al funzionamento del sito e, ove adottati, alla memorizzazione delle preferenze privacy/cookie espresse dall'utente;",
+                    item2: "il servizio di terza parte Google Maps, caricato solo previo consenso dell'utente.",
+                    outro: "Il sito, nella configurazione qui descritta, non utilizza cookie analytics propri né strumenti di profilazione propri."
+                },
+                section3: {
+                    title: "3. Cookie e strumenti tecnici",
+                    content: "Gli strumenti tecnici sono utilizzati per consentire la corretta erogazione del sito, la sicurezza della navigazione, l'eventuale memorizzazione della scelta effettuata dall'utente tramite il banner cookie e l'esecuzione di funzioni richieste dall'utente. Tali strumenti non richiedono consenso."
+                },
+                section4: {
+                    title: "4. Google Maps",
+                    p1: "La mappa interattiva delle stazioni è fornita tramite Google Maps. Il relativo contenuto non viene caricato automaticamente al primo accesso, ma solo a seguito di specifico consenso dell'utente.",
+                    p2: "Prima del consenso, il sito mantiene disponibile una modalità alternativa non interattiva o non tracciante, quale la lista delle stazioni.",
+                    p3: "A seguito del consenso, Google Maps può trattare dati relativi alla navigazione e al dispositivo dell'utente, inclusi, a titolo esemplificativo:",
+                    li1: "indirizzo IP",
+                    li2: "informazioni sul browser e sul dispositivo",
+                    li3: "dati tecnici di richiesta",
+                    li4: "eventuali dati di interazione con la mappa",
+                    li5: "dati di posizione (se autorizzati dall'utente nelle impostazioni del proprio browser o dispositivo)",
+                    p4: "Google può inoltre utilizzare cookie e tecnologie analoghe secondo le proprie policy."
+                },
+                section5: {
+                    title: "5. Base giuridica",
+                    content: "Gli strumenti tecnici sono utilizzati sulla base della necessità tecnica di fornire il sito e il servizio richiesto dall'utente. Google Maps viene attivato solo sulla base del consenso libero, specifico, informato e inequivocabile dell'utente."
+                },
+                section6: {
+                    title: "6. Modalità di raccolta e gestione del consenso",
+                    p1: "Al primo accesso, nessun contenuto Google Maps viene caricato finché l'utente non abbia prestato il relativo consenso.",
+                    p2: "Il rifiuto del consenso non pregiudica la navigazione del sito e non impedisce la consultazione dei contenuti essenziali.",
+                    p3: "L'utente può in ogni momento modificare o revocare le proprie scelte tramite il link <strong class=\"text-white\">\"Rivedi preferenze cookie\"</strong> presente nel footer del sito o in altra area sempre accessibile."
+                },
+                modifyConsent: {
+                    text: "Vuoi modificare le tue preferenze sui cookie?",
+                    button: "Modifica preferenze cookie"
+                },
+                section7: {
+                    title: "7. Destinatari e trasferimenti extra SEE",
+                    content: "Per il servizio Google Maps, i dati possono essere trattati da Google Ireland Limited e, nei limiti previsti dall'organizzazione del servizio, da Google LLC o altre società del gruppo Google. Eventuali trasferimenti di dati fuori dallo Spazio Economico Europeo avvengono secondo i meccanismi dichiarati dal fornitore e applicabili al caso concreto."
+                },
+                section8: {
+                    title: "8. Hosting e infrastruttura",
+                    content: "Il sito è pubblicato su infrastruttura GitHub Pages. L'eventuale trattamento di log tecnici o dati infrastrutturali da parte dell'hosting provider attiene all'erogazione e alla sicurezza del servizio e non costituisce, di per sé, uso di cookie non tecnici sul terminale dell'utente. Tali trattamenti sono descritti nella Privacy Policy."
+                },
+                section9: {
+                    title: "9. Come disabilitare i cookie dal browser",
+                    content: "L'utente può inoltre gestire o cancellare i cookie tramite le impostazioni del proprio browser. Tale operazione può tuttavia incidere sul corretto funzionamento di alcuni servizi.",
+                    chrome: "Guida Chrome",
+                    safari: "Guida Safari",
+                    firefox: "Guida Firefox",
+                    edge: "Guida Edge"
+                },
+                section10: {
+                    title: "10. Aggiornamenti",
+                    content: "La presente Cookie Policy può essere aggiornata in qualsiasi momento, anche in conseguenza di modifiche normative, tecniche o organizzative. La versione aggiornata è pubblicata su questa pagina con indicazione della data di ultimo aggiornamento."
+                },
+                section11: {
+                    title: "11. Contatti",
+                    content: "Per informazioni in materia di privacy e cookie:"
+                }
             },
             en: {
-                pageTitle: "Privacy Policy (Art. 13 GDPR)",
-                pageUpdated: "Last updated: March 26, 2026",
                 back: "Back to Site",
-                footerCompany: "Wee S.R.L.S. | Registered Office: Via delle Industrie 1/A, 35010 Limena (PD), Italy | VAT No. 05774330285 | REA: [INSERT REA] | Certified email (PEC): wee@pec.it",
-                content: `
-                    <p>
-                        This notice is provided by <strong>Wee S.R.L.S.</strong>, with registered office at
-                        Via delle Industrie 1/A, 35010 Limena (PD), Italy, VAT No. 05774330285, REA [INSERT REA],
-                        e-mail <a href="mailto:info@plughub.it">info@plughub.it</a>, certified e-mail (PEC)
-                        <a href="mailto:wee@pec.it">wee@pec.it</a>, acting as the
-                        <strong>Data Controller</strong> for the website <strong>www.plughub.it</strong>.
-                    </p>
-
-                    <h2>1. Scope of this notice</h2>
-                    <p>
-                        This notice applies to personal data processed through www.plughub.it when users browse the website,
-                        consult the station list, choose to activate the interactive map through Google Maps, optionally enable
-                        browser or device location features to view distances, or contact the Controller through the e-mail
-                        addresses published on the website.
-                    </p>
-
-                    <h2>2. Categories of personal data processed</h2>
-
-                    <h3>a) Browsing and technical data</h3>
-                    <p>
-                        During normal browsing, technical and connection data may be processed, including, by way of example,
-                        IP address, date and time of the request, technical information about the browser and device,
-                        operating system data, and other information necessary for the proper delivery of the pages
-                        and the security of the service.
-                    </p>
-                    <p>
-                        The website is currently published through <strong>GitHub Pages</strong>. Within that infrastructure,
-                        logs and technical data may be processed for security, service availability, and abuse prevention purposes.
-                    </p>
-
-                    <h3>b) Data processed when activating the interactive map</h3>
-                    <p>
-                        The interactive station map is provided through <strong>Google Maps</strong> and is not automatically loaded
-                        on first access. It is activated only after the user has provided consent through the website’s cookie
-                        preference mechanism.
-                    </p>
-                    <p>
-                        Once activated, the use of the service may involve the processing, including by Google, of data such as
-                        IP address, browser and device data, referrer URL, technical request data, interaction data with the map,
-                        and, within the limits allowed by the user’s settings, location data.
-                    </p>
-
-                    <h3>c) Device location data, if enabled by the user</h3>
-                    <p>
-                        If the user voluntarily authorizes browser or device location in order to view distances from the stations,
-                        geolocation or proximity data made available by the browser or device may be processed.
-                    </p>
-                    <p>
-                        This feature is optional. Refusing authorization does not prevent navigation of the website or access
-                        to its essential contents.
-                    </p>
-                    <p>
-                        In the website’s current configuration, such data is not used by the Controller for profiling purposes.
-                        Except for any autonomous processing carried out by Google once the map is activated, location data
-                        is used solely to provide the function requested by the user and only for the strictly necessary technical time.
-                    </p>
-
-                    <h3>d) Data voluntarily provided by the user by e-mail</h3>
-                    <p>
-                        The optional, explicit, and voluntary sending of messages to the e-mail addresses published on the website
-                        entails the processing of the data contained in the communication, including the sender’s e-mail address,
-                        name and surname, message content, and any other personal data voluntarily provided.
-                    </p>
-
-                    <h2>3. Purposes of processing and legal bases</h2>
-                    <p>Personal data is processed for the following purposes:</p>
-                    <ul>
-                        <li>
-                            <strong>to enable browsing, technical operation of the website, infrastructure management, and service security</strong>.<br>
-                            Legal basis: <strong>Art. 6(1)(f) GDPR</strong> – legitimate interest of the Controller and technical providers
-                            in ensuring proper operation, availability, and security of the website.
-                        </li>
-                        <li>
-                            <strong>to provide the interactive map through Google Maps at the user’s request</strong>.<br>
-                            Legal basis: <strong>Art. 6(1)(a) GDPR</strong> – user consent.
-                        </li>
-                        <li>
-                            <strong>to use, if enabled by the user, browser or device location in order to display distances
-                            or facilitate map consultation</strong>.<br>
-                            Legal basis: <strong>Art. 6(1)(a) GDPR</strong> – user consent / specific authorization through
-                            browser, device, or website mechanisms.
-                        </li>
-                        <li>
-                            <strong>to handle information requests, business contacts, or pre-contractual communications received by e-mail</strong>.<br>
-                            Legal basis: <strong>Art. 6(1)(b) GDPR</strong>, where processing is necessary to take steps at the request
-                            of the data subject prior to entering into a contract, or <strong>Art. 6(1)(f) GDPR</strong>
-                            for ordinary correspondence management.
-                        </li>
-                        <li>
-                            <strong>to comply with legal obligations or defend the Controller’s rights</strong>.<br>
-                            Legal basis: <strong>Art. 6(1)(c) GDPR</strong> and, where applicable,
-                            <strong>Art. 6(1)(f) GDPR</strong>.
-                        </li>
-                    </ul>
-
-                    <h2>4. Nature of the provision of data</h2>
-                    <p>
-                        The provision of technically necessary browsing data is inherent in the use of Internet protocols
-                        and the functioning of the website.
-                    </p>
-                    <p>
-                        Activation of <strong>Google Maps</strong> and any authorization of <strong>location</strong> are optional.
-                        Refusing consent only prevents the use of the interactive map or distance-related feature,
-                        but does not prevent access to the website’s essential contents.
-                    </p>
-                    <p>
-                        Sending data by e-mail is optional; however, failure to provide the minimum data required may make it
-                        impossible to respond to the user’s request.
-                    </p>
-
-                    <h2>5. Recipients of personal data</h2>
-                    <p>
-                        Personal data may be processed, within the limits of the purposes indicated above, by:
-                    </p>
-                    <ul>
-                        <li>authorized personnel and collaborators of the Controller;</li>
-                        <li>technical and infrastructure service providers;</li>
-                        <li>hosting and website publishing providers;</li>
-                        <li>the e-mail service provider used by the Controller;</li>
-                        <li>Google, where Google Maps or related features are activated;</li>
-                        <li>authorities, bodies, or subjects entitled by law or valid legal order to receive the data.</li>
-                    </ul>
-
-                    <h2>6. Transfers of data outside the EEA</h2>
-                    <p>
-                        The use of third-party services such as <strong>GitHub Pages</strong> and <strong>Google Maps</strong>
-                        may involve the transfer of personal data to countries outside the European Economic Area.
-                    </p>
-                    <p>
-                        Such transfers take place on the basis of the mechanisms declared by the relevant providers, including,
-                        where applicable, adequacy decisions, the <strong>Data Privacy Framework</strong>, and/or
-                        <strong>Standard Contractual Clauses</strong>.
-                    </p>
-
-                    <h2>7. Retention period</h2>
-                    <p>
-                        Personal data is retained for no longer than necessary for the purposes for which it is processed,
-                        in accordance with the storage limitation principle.
-                    </p>
-                    <ul>
-                        <li>
-                            <strong>technical and infrastructure data</strong> is retained according to the timeframes and criteria
-                            established by the competent providers for security, service continuity, and abuse prevention purposes;
-                        </li>
-                        <li>
-                            <strong>data connected to map activation</strong> and the optional use of location
-                            is processed for the time necessary to provide the requested function, without prejudice to any autonomous
-                            processing by the third-party provider;
-                        </li>
-                        <li>
-                            <strong>data contained in e-mail requests</strong> is retained for the time necessary to handle the request
-                            and, as a rule, no longer than <strong>12 months from the last contact</strong>, unless further correspondence,
-                            negotiations, a contractual relationship, legal obligations, or the need to defend rights requires longer retention.
-                        </li>
-                    </ul>
-
-                    <h2>8. Processing methods and security measures</h2>
-                    <p>
-                        Processing is carried out by electronic means and with logic strictly related to the purposes indicated,
-                        in compliance with the principles of lawfulness, fairness, transparency, data minimization, accuracy,
-                        storage limitation, integrity, and confidentiality.
-                    </p>
-                    <p>
-                        The Controller adopts technical and organizational measures appropriate to the risks of the processing.
-                    </p>
-
-                    <h2>9. Automated decision-making and profiling</h2>
-                    <p>
-                        In the website’s current configuration, the Controller <strong>does not carry out</strong>
-                        automated decision-making producing legal effects concerning the data subject within the meaning of Art. 22 GDPR,
-                        nor does it carry out its own profiling activities through the website.
-                    </p>
-                    <p>
-                        Any third-party services activated by the user operate in accordance with their own policies.
-                    </p>
-
-                    <h2>10. Data subject rights</h2>
-                    <p>
-                        In the cases provided for by Articles 15-22 GDPR, the data subject may exercise the following rights:
-                    </p>
-                    <ul>
-                        <li>obtain confirmation as to whether or not personal data concerning them is being processed;</li>
-                        <li>access their personal data;</li>
-                        <li>request rectification;</li>
-                        <li>request erasure;</li>
-                        <li>obtain restriction of processing;</li>
-                        <li>object to processing, where provided by law;</li>
-                        <li>receive the data in a structured, commonly used, machine-readable format, where applicable;</li>
-                        <li>withdraw consent at any time, without affecting the lawfulness of processing based on consent before its withdrawal;</li>
-                        <li>not be subject to decisions based solely on automated processing, where provided by Art. 22 GDPR.</li>
-                    </ul>
-                    <p>
-                        Requests may be sent to:
-                        <a href="mailto:info@plughub.it">info@plughub.it</a>.
-                    </p>
-
-                    <h2>11. Right to lodge a complaint</h2>
-                    <p>
-                        The data subject has the right to lodge a complaint with the
-                        <strong>Italian Data Protection Authority (Garante per la protezione dei dati personali)</strong>
-                        if they believe that the processing of personal data concerning them infringes the applicable law,
-                        and may also bring proceedings before the competent judicial authority.
-                    </p>
-
-                    <h2>12. Links to third-party websites and services</h2>
-                    <p>
-                        The website may contain links or integrations with third-party services, including Google services.
-                        When the user interacts with such services, personal data is processed according to the relevant provider’s own policies.
-                    </p>
-                    <p>
-                        For more information, users are invited to consult:
-                    </p>
-                    <ul>
-                        <li><a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener noreferrer">GitHub Privacy Statement</a>;</li>
-                        <li><a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google Privacy Policy</a>;</li>
-                        <li><a href="cookie-policy.html">the website Cookie Policy</a>.</li>
-                    </ul>
-
-                    <h2>13. Changes to this notice</h2>
-                    <p>
-                        This notice may be updated at any time due to legal, technical, or organizational changes.
-                        The updated version will be published on this page together with the date of the latest update.
-                    </p>
-
-                    <h2>14. Contacts</h2>
-                    <p>
-                        For any request relating to the processing of personal data, the Controller may be contacted at:
-                    </p>
-                    <p>
-                        <strong>E-mail:</strong> <a href="mailto:info@plughub.it">info@plughub.it</a><br>
-                        <strong>Certified e-mail (PEC):</strong> <a href="mailto:wee@pec.it">wee@pec.it</a>
-                    </p>
-                `
+                title: "Cookie Policy",
+                updated: "Last updated: March 26, 2026",
+                intro: "This Cookie Policy is provided by <strong class=\"text-white\">Wee S.R.L.S.</strong>, with registered office at Via delle Industrie 1/A, 35010 Limena (PD), VAT 05774330285, REA [REA], email: <strong class=\"text-white\">info@plughub.it</strong>, PEC: <strong class=\"text-white\">wee@pec.it</strong>, as data controller, in relation to the website <strong class=\"text-white\">www.plughub.it</strong>.",
+                section1: {
+                    title: "1. What are cookies and similar tools",
+                    content: "Cookies are small text files that websites visited by the user can store on the user's device. Similar functions can also be performed by other tracking tools."
+                },
+                section2: {
+                    title: "2. Types of tools used by this site",
+                    intro: "This site exclusively uses:",
+                    item1: "technical tools strictly necessary for the operation of the site and, where adopted, for storing privacy/cookie preferences expressed by the user;",
+                    item2: "the third-party service Google Maps, loaded only with the user's prior consent.",
+                    outro: "The site, in the configuration described here, does not use proprietary analytics cookies or proprietary profiling tools."
+                },
+                section3: {
+                    title: "3. Technical cookies and tools",
+                    content: "Technical tools are used to enable proper site delivery, browsing security, possible storage of choices made by the user through the cookie banner, and execution of functions requested by the user. These tools do not require consent."
+                },
+                section4: {
+                    title: "4. Google Maps",
+                    p1: "The interactive station map is provided via Google Maps. This content is not automatically loaded on first access, but only following specific user consent.",
+                    p2: "Before consent, the site maintains an available alternative non-interactive or non-tracking mode, such as the station list.",
+                    p3: "Following consent, Google Maps may process data relating to navigation and the user's device, including, by way of example:",
+                    li1: "IP address",
+                    li2: "browser and device information",
+                    li3: "technical request data",
+                    li4: "any map interaction data",
+                    li5: "location data (if authorized by the user in their browser or device settings)",
+                    p4: "Google may also use cookies and similar technologies according to its own policies."
+                },
+                section5: {
+                    title: "5. Legal basis",
+                    content: "Technical tools are used on the basis of the technical necessity to provide the site and the service requested by the user. Google Maps is activated only on the basis of the user's free, specific, informed and unambiguous consent."
+                },
+                section6: {
+                    title: "6. Consent collection and management methods",
+                    p1: "On first access, no Google Maps content is loaded until the user has given the relevant consent.",
+                    p2: "Refusing consent does not prejudice site navigation and does not prevent consultation of essential content.",
+                    p3: "The user can modify or revoke their choices at any time via the <strong class=\"text-white\">\"Review cookie preferences\"</strong> link in the site footer or in another always accessible area."
+                },
+                modifyConsent: {
+                    text: "Do you want to change your cookie preferences?",
+                    button: "Modify cookie preferences"
+                },
+                section7: {
+                    title: "7. Recipients and transfers outside the EEA",
+                    content: "For the Google Maps service, data may be processed by Google Ireland Limited and, within the limits provided by the service organization, by Google LLC or other companies in the Google group. Any data transfers outside the European Economic Area take place according to the mechanisms declared by the provider and applicable to the specific case."
+                },
+                section8: {
+                    title: "8. Hosting and infrastructure",
+                    content: "The site is published on GitHub Pages infrastructure. Any processing of technical logs or infrastructure data by the hosting provider relates to service delivery and security and does not constitute, in itself, use of non-technical cookies on the user's terminal. These processing activities are described in the Privacy Policy."
+                },
+                section9: {
+                    title: "9. How to disable cookies from your browser",
+                    content: "The user can also manage or delete cookies through their browser settings. However, this operation may affect the proper functioning of some services.",
+                    chrome: "Chrome Guide",
+                    safari: "Safari Guide",
+                    firefox: "Firefox Guide",
+                    edge: "Edge Guide"
+                },
+                section10: {
+                    title: "10. Updates",
+                    content: "This Cookie Policy may be updated at any time, including as a result of regulatory, technical or organizational changes. The updated version is published on this page with the indication of the last update date."
+                },
+                section11: {
+                    title: "11. Contact",
+                    content: "For information regarding privacy and cookies:"
+                }
             }
         };
 
@@ -722,21 +470,111 @@
             document.documentElement.lang = lang;
             updatePageContent();
             updateLangSelector();
-            document.getElementById('lang-dropdown').classList.add('hidden');
+            toggleDropdown();
         }
 
         function updatePageContent() {
             const t = translations[currentLang];
 
-            document.getElementById('page-title').textContent = t.pageTitle;
-            document.getElementById('page-updated').textContent = t.pageUpdated;
-            document.getElementById('back-btn').textContent = t.back;
-            document.getElementById('privacy-content').innerHTML = t.content;
-            document.getElementById('footer-company-it').textContent = t.footerCompany;
+            // Update simple text elements
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (t[key]) el.textContent = t[key];
+            });
 
-            document.title = currentLang === 'it'
-                ? 'Privacy Policy | PLUGHUB'
-                : 'Privacy Policy | PLUGHUB';
+            // Update intro
+            document.querySelectorAll('[data-i18n-section="intro"]').forEach(el => {
+                el.querySelector('p').innerHTML = t.intro;
+            });
+
+            // Update sections
+            document.querySelectorAll('[data-i18n-section="section1"]').forEach(el => {
+                el.querySelector('h2').textContent = t.section1.title;
+                el.querySelector('p').textContent = t.section1.content;
+            });
+
+            document.querySelectorAll('[data-i18n-section="section2"]').forEach(el => {
+                const headings = el.querySelectorAll('h2');
+                const paragraphs = el.querySelectorAll('p');
+                const lists = el.querySelectorAll('ul li');
+                headings[0].textContent = t.section2.title;
+                paragraphs[0].textContent = t.section2.intro;
+                lists[0].innerHTML = '<strong class="text-white">a)</strong> ' + t.section2.item1;
+                lists[1].innerHTML = '<strong class="text-white">b)</strong> ' + t.section2.item2;
+                paragraphs[1].textContent = t.section2.outro;
+            });
+
+            document.querySelectorAll('[data-i18n-section="section3"]').forEach(el => {
+                el.querySelector('h2').textContent = t.section3.title;
+                el.querySelector('p').textContent = t.section3.content;
+            });
+
+            document.querySelectorAll('[data-i18n-section="section4"]').forEach(el => {
+                const headings = el.querySelectorAll('h2');
+                const paragraphs = el.querySelectorAll('p');
+                const lists = el.querySelectorAll('ul li');
+                headings[0].textContent = t.section4.title;
+                paragraphs[0].textContent = t.section4.p1;
+                paragraphs[1].textContent = t.section4.p2;
+                paragraphs[2].textContent = t.section4.p3;
+                lists[0].textContent = t.section4.li1;
+                lists[1].textContent = t.section4.li2;
+                lists[2].textContent = t.section4.li3;
+                lists[3].textContent = t.section4.li4;
+                lists[4].textContent = t.section4.li5;
+                paragraphs[3].textContent = t.section4.p4;
+            });
+
+            document.querySelectorAll('[data-i18n-section="section5"]').forEach(el => {
+                el.querySelector('h2').textContent = t.section5.title;
+                el.querySelector('p').textContent = t.section5.content;
+            });
+
+            document.querySelectorAll('[data-i18n-section="section6"]').forEach(el => {
+                const headings = el.querySelectorAll('h2');
+                const paragraphs = el.querySelectorAll('p');
+                headings[0].textContent = t.section6.title;
+                paragraphs[0].textContent = t.section6.p1;
+                paragraphs[1].textContent = t.section6.p2;
+                paragraphs[2].innerHTML = t.section6.p3;
+            });
+
+            document.querySelectorAll('[data-i18n-section="section7"]').forEach(el => {
+                el.querySelector('h2').textContent = t.section7.title;
+                el.querySelector('p').textContent = t.section7.content;
+            });
+
+            document.querySelectorAll('[data-i18n-section="section8"]').forEach(el => {
+                el.querySelector('h2').textContent = t.section8.title;
+                el.querySelector('p').textContent = t.section8.content;
+            });
+
+            document.querySelectorAll('[data-i18n-section="section9"]').forEach(el => {
+                const headings = el.querySelectorAll('h2');
+                const paragraphs = el.querySelectorAll('p');
+                const links = el.querySelectorAll('ul li a');
+                headings[0].textContent = t.section9.title;
+                paragraphs[0].textContent = t.section9.content;
+                links[0].textContent = t.section9.chrome;
+                links[1].textContent = t.section9.safari;
+                links[2].textContent = t.section9.firefox;
+                links[3].textContent = t.section9.edge;
+            });
+
+            document.querySelectorAll('[data-i18n-section="section10"]').forEach(el => {
+                el.querySelector('h2').textContent = t.section10.title;
+                el.querySelector('p').textContent = t.section10.content;
+            });
+
+            document.querySelectorAll('[data-i18n-section="section11"]').forEach(el => {
+                const headings = el.querySelectorAll('h2');
+                const paragraphs = el.querySelectorAll('p');
+                headings[0].textContent = t.section11.title;
+                paragraphs[0].innerHTML = t.section11.content + ' <strong class="text-white">info@plughub.it</strong>';
+            });
+
+            // Update page title
+            document.title = t.title + ' | PLUGHUB';
         }
 
         function updateLangSelector() {
@@ -746,15 +584,21 @@
             });
         }
 
+        function toggleDropdown() {
+            document.getElementById('lang-dropdown').classList.toggle('hidden');
+        }
+
+        // Initialize
         document.getElementById('lang-toggle').addEventListener('click', function(e) {
             e.stopPropagation();
-            document.getElementById('lang-dropdown').classList.toggle('hidden');
+            toggleDropdown();
         });
 
         document.addEventListener('click', function() {
             document.getElementById('lang-dropdown').classList.add('hidden');
         });
 
+        // Load saved language
         updatePageContent();
         updateLangSelector();
     </script>
